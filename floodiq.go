@@ -1,13 +1,48 @@
 package floodiq
 
-// DefaultHost is where all API requests are handled
-const DefaultHost = "https://api.floodiq.com"
+import (
+	"net/http"
 
-// Version is the current client library version
-const Version = "0.1-beta"
+	"github.com/firststreet/floodiq-go/backend"
+	"github.com/firststreet/floodiq-go/parcel"
+)
 
-// Client allows interactions between the Flood iQ API
-type Client struct {
-	// APIKey is `the` users API Key. Get one at https://floodiq.dev
-	APIKey string
+const (
+	// DefaultHost is where all API requests are handled
+	DefaultHost = "https://api.floodiq.com"
+	// Version is the current client library version
+	Version = "0.1-beta"
+)
+
+// The API provides interfaces to Flood iQ services
+type API struct {
+	Parcel    *parcel.Client
+	RateLimit *backend.RateLimit
+}
+
+// InitAPI initalizes services-level APIs
+func (a *API) InitAPI(key string, backend *backend.Backend) {
+	a.Parcel = &parcel.Client{B: backend, Key: key}
+}
+
+// newAPI creates an API for usage
+func newAPI(key string, backend *backend.Backend) *API {
+	a := &API{}
+	a.InitAPI(key, backend)
+	return a
+}
+
+func New(key string) *API {
+	// The backend is used to interact with the Flood iQ API
+	backend := &backend.Backend{
+		HTTPClient: &http.Client{},
+		URL:        DefaultHost,
+		Version:    Version,
+	}
+
+	a := newAPI(key, backend)
+
+	a.RateLimit = backend.RateLimit
+
+	return a
 }

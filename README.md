@@ -33,28 +33,38 @@ import (
 ```
 
 // Create a new Flood iq API Client
-fiq := floodiq.Client{
-  APIKey: "string-from-floodiq-dev-account",
-}
-
+fiq := floodiq.New("api-key")
 ```
 
 ### Data Services
 
 **Parcel**
 
-All parcel queries require a `type`.
+The parcel service is broken down into two separate interfaces: `ParcelProperty` for Property Parcel information and `ParcelCity` for City Parcel information.
+
+## Property Parcels
 
 ```
 
-fiq.Data.Parcel.ByID("id", "type")
-fiq.Data.Parcel.ByLatLng(lat, lng, "type")
-fiq.Data.Parcel.ByAddress("address", "type")
+fiq.Parcel.GetPropertyByID("id")
+fiq.Parcel.GetCityByID("id")
+
+```
+
+## City Parcels
+
+```
+
+fiq.Data.ParcelCity.ByID("id")
+fiq.Data.ParcelCity.ByLatLng(lat, lng)
+fiq.Data.ParcelCity.ByAddress("address")
 ```
 
 **Hurricane**
 
+
 ```
+fiq.Data.Hurricane.ByParcel(*Parcel)
 fiq.Data.Hurricane.ByID("id", "type")
 fiq.Data.Hurricane.ByLatLng(lat, lng, "type")
 fiq.Data.Hurricane.ByAddress("address", "type")
@@ -63,6 +73,7 @@ fiq.Data.Hurricane.ByAddress("address", "type")
 **Tidal**
 
 ```
+fiq.Data.Tidal.ByParcel(*Parcel)
 fiq.Data.Tidal.ByID("id", "type")
 fiq.Data.Tidal.ByLatLng(lat, lng, "type")
 fiq.Data.Tidal.ByAddress("address", "type")
@@ -80,3 +91,11 @@ Resolves requested tile
 fiq.Tile.Hurricane("z", "y", "x", "type", "year")
 fiq.Tile.Tidal("z", "y", "x", "type", "year")
 ```
+
+### Errors
+
+All errors will have a `Code`, `Status` and `Message` attached to it.
+
+### Rate Limits
+
+Rate limit information is provided wit
