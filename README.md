@@ -1,7 +1,7 @@
 # Go Flood iQ
 
----
 **WARNING**: This library is beta and subject to change. It's not ready to be used in production quite yet.
+
 ---
 
 This is the official implementation of the Flood iQ API in Go. Please use this client if you are using Go to interact with the Flood iQ API.
