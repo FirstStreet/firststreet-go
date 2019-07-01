@@ -55,15 +55,15 @@ type Client struct {
 
 // GetPropertyByID retreives a Property Parcel by its unique identifier
 func (c Client) GetPropertyByID(id string) (*ParcelProperty, error) {
-	path := backend.FormatURLPath("/data/parcel/%s?type=property&key=%s", id, c.Key)
+	path := backend.FormatURLPath("/data/"+c.B.Version+"/parcel/%s?type=property&key=%s", id, c.Key)
 	property := &ParcelProperty{}
 	err := c.B.Call(http.MethodGet, path, c.Key, property)
 	return property, err
 }
 
-// GetCityByID. retreives a Property Parcel by its unique identifier
+// GetCityByID retreives a City Parcel by its unique identifier
 func (c Client) GetCityByID(id string) (*ParcelCity, error) {
-	path := backend.FormatURLPath("/data/parcel/%s?type=city&key=%s", id, c.Key)
+	path := backend.FormatURLPath("/data/"+c.B.Version+"/parcel/%s?type=city&key=%s", id, c.Key)
 	city := &ParcelCity{}
 	err := c.B.Call(http.MethodGet, path, c.Key, city)
 	return city, err

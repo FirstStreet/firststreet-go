@@ -9,9 +9,9 @@ import (
 
 const (
 	// DefaultHost is where all API requests are handled
-	DefaultHost = "https://api.floodiq.com"
-	// Version is the current client library version
-	Version = "0.1-beta"
+	DefaultHost = "http://apidev.firststreet.org"
+	// Version is the current api version
+	Version = "1.0"
 )
 
 // The API provides interfaces to Flood iQ services
