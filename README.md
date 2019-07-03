@@ -24,7 +24,7 @@ import (
 )
 ```
 
-## Quick Start
+## Documentation
 
 **In order to use the Flood iQ API, you must register for an API key at https://floodiq.dev.**
 
@@ -36,32 +36,21 @@ import (
 fiq := floodiq.New("api-key")
 ```
 
-### Data Services
+### **Parcel**
 
-**Parcel**
+`fiq.Parcel.<method>`
 
-The parcel service is broken down into two separate interfaces: `ParcelProperty` for Property Parcel information and `ParcelCity` for City Parcel information.
+**Property**
 
-## Property Parcels
+- GetPropertyByID(ID `string`) - Retreives a `ParcelProperty` by specific ID
+- GetPropertyByLatLng(lat `float64`, lng `float64`) - Retreives a `ParcelProperty` by a coordinate
 
-```
+**City**
 
-fiq.Parcel.GetPropertyByID("id")
-fiq.Parcel.GetCityByID("id")
-
-```
-
-## City Parcels
-
-```
-
-fiq.Data.ParcelCity.ByID("id")
-fiq.Data.ParcelCity.ByLatLng(lat, lng)
-fiq.Data.ParcelCity.ByAddress("address")
-```
+- GetCityByID(ID `string`) - Retreives a `ParcelProperty` by specific ID
+- GetCityByLatLng(lat `float64`, lng `float64`) - Retreives a `ParcelProperty` by a coordinate
 
 **Hurricane**
-
 
 ```
 fiq.Data.Hurricane.ByParcel(*Parcel)
