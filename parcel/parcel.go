@@ -7,6 +7,9 @@ import (
 	geojson "github.com/paulmach/go.geojson"
 )
 
+// version is the current product version
+const version = "1.0"
+
 // A ParcelGeometry contains a polygon (boundingbox)
 // and the Bounds (viewport) of a location
 type ParcelGeometry struct {
@@ -55,7 +58,7 @@ type Client struct {
 
 // GetPropertyByID retreives a Property Parcel by its unique identifier
 func (c Client) GetPropertyByID(id string) (*ParcelProperty, error) {
-	path := backend.FormatURLPath("/data/"+c.B.Version+"/parcel/%s?type=property&key=%s", id, c.Key)
+	path := backend.FormatURLPath("/data/"+version+"/parcel/%s?type=property&key=%s", id, c.Key)
 	property := &ParcelProperty{}
 	err := c.B.Call(http.MethodGet, path, c.Key, property)
 	return property, err
@@ -63,7 +66,7 @@ func (c Client) GetPropertyByID(id string) (*ParcelProperty, error) {
 
 // GetCityByID retreives a City Parcel by its unique identifier
 func (c Client) GetCityByID(id string) (*ParcelCity, error) {
-	path := backend.FormatURLPath("/data/"+c.B.Version+"/parcel/%s?type=city&key=%s", id, c.Key)
+	path := backend.FormatURLPath("/data/"+version+"/parcel/%s?type=city&key=%s", id, c.Key)
 	city := &ParcelCity{}
 	err := c.B.Call(http.MethodGet, path, c.Key, city)
 	return city, err
