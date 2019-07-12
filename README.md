@@ -18,7 +18,7 @@ go get -u github.com/firststreet/floodiq-go
 
 Next, import it into your project:
 
-```
+```go
 import (
   "github.com/firststreet/floodiq-go
 )
@@ -28,10 +28,9 @@ import (
 
 **In order to use the Flood iQ API, you must register for an API key at https://floodiq.dev.**
 
-### Initalizing Client
+### Initalizing the client
 
-```
-
+```go
 // Create a new Flood iq API Client
 fiq := floodiq.New("api-key")
 ```
@@ -40,35 +39,19 @@ fiq := floodiq.New("api-key")
 
 `fiq.Parcel.<method>`
 
-**Property**
+**Property Methods**
 
 - GetPropertyByID(ID `string`) - Retreives a `ParcelProperty` by specific ID
 - GetPropertyByLatLng(lat `float64`, lng `float64`) - Retreives a `ParcelProperty` by a coordinate
 
-**City**
+**City Methods**
 
 - GetCityByID(ID `string`) - Retreives a `ParcelProperty` by specific ID
 - GetCityByLatLng(lat `float64`, lng `float64`) - Retreives a `ParcelProperty` by a coordinate
 
-**Hurricane**
+---
 
-```
-fiq.Data.Hurricane.ByParcel(*Parcel)
-fiq.Data.Hurricane.ByID("id", "type")
-fiq.Data.Hurricane.ByLatLng(lat, lng, "type")
-fiq.Data.Hurricane.ByAddress("address", "type")
-```
-
-**Tidal**
-
-```
-fiq.Data.Tidal.ByParcel(*Parcel)
-fiq.Data.Tidal.ByID("id", "type")
-fiq.Data.Tidal.ByLatLng(lat, lng, "type")
-fiq.Data.Tidal.ByAddress("address", "type")
-```
-
-### Tile Service
+## Tiles
 
 Generally, while loading tiles, you can provide an X/Y/Z URL to access the tile service directly (such as api.floodiq.com/tile/hurricane/z/y/x.png?key=abc123&type=c3&year=2032). This portion of the client is included if you need the raw bytes returned from the tile service.
 
