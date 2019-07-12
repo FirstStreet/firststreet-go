@@ -2,6 +2,7 @@ package parcel
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/firststreet/floodiq-go/backend"
 	geojson "github.com/paulmach/go.geojson"
@@ -59,6 +60,17 @@ type Client struct {
 // GetPropertyByID retreives a Property Parcel by its unique identifier
 func (c Client) GetPropertyByID(id string) (*ParcelProperty, error) {
 	path := backend.FormatURLPath("/data/"+version+"/parcel/%s?type=property&key=%s", id, c.Key)
+	property := &ParcelProperty{}
+	err := c.B.Call(http.MethodGet, path, c.Key, property)
+	return property, err
+}
+
+// GetPropertyByLatLng pulls a parcel by lat lng
+func (c Client) GetPropertyByLatLng(lat, lng float64) (*ParcelProperty, error) {
+	latStr := strconv.FormatFloat(lat, 'f', -1, 64)
+	lngStr := strconv.FormatFloat(lng, 'f', -1, 64)
+
+	path := backend.FormatURLPath("/data/"+version+"/parcel?type=property&key=%s&lat=%s&lng=%s", c.Key, latStr, lngStr)
 	property := &ParcelProperty{}
 	err := c.B.Call(http.MethodGet, path, c.Key, property)
 	return property, err
