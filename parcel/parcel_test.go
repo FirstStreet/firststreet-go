@@ -1,7 +1,6 @@
 package parcel
 
 import (
-	"fmt"
 	"net/http"
 	"testing"
 
@@ -31,7 +30,7 @@ func TestGetPropertyByID(t *testing.T) {
 	assert.NotNil(t, property)
 }
 
-func TestGetPropertyByAddress(t *testing.T) {
+func TestAddressLookup(t *testing.T) {
 	testutil.Once.Do(testutil.StartServer)
 	testBackend.URL = testutil.ServerAddr
 
@@ -40,7 +39,10 @@ func TestGetPropertyByAddress(t *testing.T) {
 		Key: "test",
 	}
 	property, err := c.GetPropertyByAddress("212 appoquin s, middletown, delware")
-	fmt.Println("property", property)
 	assert.Nil(t, err)
 	assert.NotNil(t, property)
+
+	city, err := c.GetCityByAddress("Miami, FL")
+	assert.Nil(t, err)
+	assert.NotNil(t, city)
 }

@@ -92,3 +92,11 @@ func (c Client) GetPropertyByAddress(address string) (*ParcelProperty, error) {
 	err := c.B.Call(http.MethodGet, path, c.Key, property)
 	return property, err
 }
+
+// GetCityByAddress retrieves a City Parcel by address
+func (c Client) GetCityByAddress(address string) (*ParcelCity, error) {
+	path := backend.FormatURLPath("/data/"+version+"/parcel/?address=%s&type=city&key=%s", url.QueryEscape(address), c.Key)
+	city := &ParcelCity{}
+	err := c.B.Call(http.MethodGet, path, c.Key, city)
+	return city, err
+}
