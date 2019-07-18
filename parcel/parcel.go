@@ -2,6 +2,7 @@ package parcel
 
 import (
 	"net/http"
+	"net/url"
 	"strconv"
 
 	"github.com/firststreet/floodiq-go/backend"
@@ -82,4 +83,12 @@ func (c Client) GetCityByID(id string) (*ParcelCity, error) {
 	city := &ParcelCity{}
 	err := c.B.Call(http.MethodGet, path, c.Key, city)
 	return city, err
+}
+
+// GetPropertyByAddress retrieves a Property Parcel by address
+func (c Client) GetPropertyByAddress(address string) (*ParcelProperty, error) {
+	path := backend.FormatURLPath("/data/"+version+"/parcel/?address=%s&type=property&key=%s", url.QueryEscape(address), c.Key)
+	property := &ParcelProperty{}
+	err := c.B.Call(http.MethodGet, path, c.Key, property)
+	return property, err
 }
