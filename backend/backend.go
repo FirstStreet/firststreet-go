@@ -107,6 +107,7 @@ func checkStatusCode(r *http.Response) error {
 	return nil
 }
 
+// Call deserializes a requested url and binds it to an interface
 func (b *Backend) Call(method, path, key string, v interface{}) error {
 	req, err := b.NewRequest(method, path, key, "application/x-www-form-urlencoded")
 	if err != nil {
@@ -118,6 +119,22 @@ func (b *Backend) Call(method, path, key string, v interface{}) error {
 	}
 
 	return nil
+}
+
+// CallBytes returns raw bytes from a call
+func (b *Backend) CallBytes(method, path, key string) ([]byte, error) {
+	req, err := b.NewRequest(method, path, key, "application/x-www-form-urlencoded")
+	if err != nil {
+		return nil, err
+	}
+
+	bytes, err := b.DoRaw(req, nil)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return bytes, nil
 }
 
 func (b *Backend) NewRequest(method, path, key, contentType string) (*http.Request, error) {
@@ -189,4 +206,46 @@ func (b *Backend) Do(req *http.Request, body *bytes.Buffer, v interface{}) error
 
 func parseResponseBody(body []byte, v interface{}) error {
 	return json.Unmarshal(body, v)
+}
+
+func (b *Backend) DoRaw(req *http.Request, body *bytes.Buffer) ([]byte, error) {
+
+	var res *http.Response
+	var err error
+
+	if body != nil {
+		reader := bytes.NewReader(body.Bytes())
+
+		req.Body = nopReadCloser{reader}
+
+		req.GetBody = func() (io.ReadCloser, error) {
+			reader := bytes.NewReader(body.Bytes())
+			return nopReadCloser{reader}, nil
+		}
+	}
+
+	res, err = b.HTTPClient.Do(req)
+
+	if err != nil {
+		fmt.Errorf("Request failed: %v", err)
+		return nil, err
+	}
+
+	defer res.Body.Close()
+
+	b.RateLimit = getRateLimit(res)
+	resBody, err := ioutil.ReadAll(res.Body)
+
+	if err != nil {
+		fmt.Errorf("Cannot read response: %v", err)
+		return nil, err
+	}
+
+	if res.StatusCode >= 400 {
+		fmt.Errorf("Cannot find resource: %v", err)
+		// SendError, res + resBody
+		return nil, err
+	}
+
+	return resBody, nil
 }
