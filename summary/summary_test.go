@@ -1,4 +1,4 @@
-package parcel
+package summary
 
 import (
 	"net/http"
@@ -14,7 +14,9 @@ var testBackend = &backend.Backend{
 }
 
 func TestGetPropertyByID(t *testing.T) {
-	testutil.Once.Do(testutil.StartServer)
+	testutil.Once.Do(func() {
+		testutil.StartServer(()func{})
+	})
 	testBackend.URL = testutil.ServerAddr
 
 	c := &Client{

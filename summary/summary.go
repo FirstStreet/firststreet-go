@@ -1,54 +1,61 @@
-package parcel
+package summary
 
 import (
 	"net/http"
 	"strconv"
 
 	"github.com/firststreet/floodiq-go/backend"
+	"github.com/firststreet/floodiq-go/jsonize"
 	geojson "github.com/paulmach/go.geojson"
 )
 
 // version is the current product version
 const version = "1.0"
 
-// A ParcelGeometry contains a polygon (boundingbox)
+// A LocationGeometry contains a polygon (boundingbox)
 // and the Bounds (viewport) of a location
-type ParcelGeometry struct {
+type LocationGeometry struct {
 	Polygon geojson.Geometry `json:"polygon"`
 	Center  geojson.Geometry `json:"center"`
 	Bounds  geojson.Geometry `json:"bounds"`
 }
 
-// A property parcel is a basic data struct for Property
-type ParcelProperty struct {
-	ID            int64                  `json:"ID"`
-	PrimaryNumber string                 `json:"primaryNumber"`
-	StreetName    string                 `json:"streetName"`
+type Location struct {
+	FSID int32
+}
+
+type Property struct {
+	Location
+	PrimaryNumber jsonize.JsonNullString `json:"primaryNumber"`
+	StreetName    jsonize.JsonNullString `json:"streetName"`
 	LastUpdated   string                 `json:"lastUpdated"`
-	Predirection  string                 `json:"predirection"`
-	Postdirection string                 `json:"postdirection"`
+	Predirection  jsonize.JsonNullString `json:"predirection"`
+	Postdirection jsonize.JsonNullString `json:"postdirection"`
 	ZipCode       int                    `json:"zipCode"`
-	City          *ParcelCityForProperty `json:"city"`
-	State         string                 `json:"state"`
-	Geometry      *ParcelGeometry        `json:"geometry"`
-	Elevation     int64                  `json:"elevation"`
-	LotSize       int64                  `json:"lotSize"`
-	HomeSize      int64                  `json:"floorArea"`
-	LandUse       string                 `json:"landUse"`
-	CountyFIPS    int64                  `json:"countyFips"`
-	Distance      float64                `json:"distance"`
+	City          *PropertyCity          `json:"city"`
+	State         jsonize.JsonNullString `json:"state"`
+	Geometry      *LocationGeometry      `json:"geometry"`
+	Elevation     jsonize.JsonNullInt64  `json:"elevation"`
+	// @TODO: FemaZone should be broken down into its own struct
+	// There could also be more than 1 femazones
+	FemaZone   jsonize.JsonNullString `json:"femaZone"`
+	LotSize    jsonize.JsonNullInt64  `json:"lotSize"`
+	HomeSize   jsonize.JsonNullInt64  `json:"floorArea"`
+	LandUse    jsonize.JsonNullString `json:"landUse"`
+	CountyFIPS jsonize.JsonNullInt64  `json:"countyFips"`
+	Distance   float64                `json:"distance"`
 }
 
-type ParcelCityForProperty struct {
-	ID   int64  `json:"ID"`
-	Name string `json:"Name"`
+type PropertyCity struct {
+	FSID jsonize.JsonNullInt64  `json:"FSID"`
+	Name jsonize.JsonNullString `json:"Name"`
 }
 
-type ParcelCity struct {
-	ID       int64           `json:"ID"`
-	Name     string          `json:"name"`
-	State    string          `json:"state"`
-	Geometry *ParcelGeometry `json:"geometry"`
+type City struct {
+	Location
+	Name     jsonize.JsonNullString `json:"name"`
+	State    jsonize.JsonNullString `json:"state"`
+	Geometry *LocationGeometry      `json:"geometry"`
 }
 
 // Client is used for /data/{svc}

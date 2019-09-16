@@ -3,8 +3,8 @@ package floodiq
 import (
 	"net/http"
 
-	"github.com/firststreet/floodiq-go/backend"
-	"github.com/firststreet/floodiq-go/parcel"
+	"github.com/firststreet/firststreet-go/backend"
+	"github.com/firststreet/firststreet-go/parcel"
 )
 
 const (
