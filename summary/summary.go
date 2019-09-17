@@ -10,7 +10,7 @@ import (
 )
 
 // version is the current product version
-const version = "1.0"
+const version = "v1.0"
 
 // A LocationGeometry contains a polygon (boundingbox)
 // and the Bounds (viewport) of a location
@@ -21,7 +21,7 @@ type LocationGeometry struct {
 }
 
 type Location struct {
-	FSID int32
+	FSID int64
 }
 
 type Property struct {
@@ -58,35 +58,46 @@ type City struct {
 	Geometry *LocationGeometry      `json:"geometry"`
 }
 
+type SummaryResponse struct {
+	FSID    int64          `json:"FSID"`
+	Type    string         `json:"type"`
+	Results SummaryResults `json:"results"`
+}
+
+type SummaryResults struct {
+	Location Location
+	// @TODO: Summary
+}
+
 // Client is used for /data/{svc}
 type Client struct {
 	B   *backend.Backend
 	Key string
 }
 
-// GetPropertyByID retreives a Property Parcel by its unique identifier
-func (c Client) GetPropertyByID(id string) (*ParcelProperty, error) {
-	path := backend.FormatURLPath("/data/"+version+"/parcel/%s?type=property&key=%s", id, c.Key)
-	property := &ParcelProperty{}
-	err := c.B.Call(http.MethodGet, path, c.Key, property)
-	return property, err
+// GetPropertyByFSID retreives a Location Summary by its unique identifier
+func (c Client) GetPropertyByFSID(fsid string) (*SummaryResponse, error) {
+	path := backend.FormatURLPath("/data/"+version+"/summary/%s?type=property&key=%s", fsid, c.Key)
+	summaryResponse := &SummaryResponse{}
+	err := c.B.Call(http.MethodGet, path, c.Key, summaryResponse)
+	return summaryResponse, err
 }
 
 // GetPropertyByLatLng pulls a parcel by lat lng
-func (c Client) GetPropertyByLatLng(lat, lng float64) (*ParcelProperty, error) {
+func (c Client) GetPropertyByLatLng(lat, lng float64) (*Property, error) {
 	latStr := strconv.FormatFloat(lat, 'f', -1, 64)
 	lngStr := strconv.FormatFloat(lng, 'f', -1, 64)
 
-	path := backend.FormatURLPath("/data/"+version+"/parcel?type=property&key=%s&lat=%s&lng=%s", c.Key, latStr, lngStr)
-	property := &ParcelProperty{}
+	path := backend.FormatURLPath("/data/"+version+"/summary?type=property&key=%s&lat=%s&lng=%s", c.Key, latStr, lngStr)
+	property := &Property{}
 	err := c.B.Call(http.MethodGet, path, c.Key, property)
 	return property, err
 }
 
 // GetCityByID retreives a City Parcel by its unique identifier
-func (c Client) GetCityByID(id string) (*ParcelCity, error) {
-	path := backend.FormatURLPath("/data/"+version+"/parcel/%s?type=city&key=%s", id, c.Key)
-	city := &ParcelCity{}
+func (c Client) GetCityByID(id string) (*City, error) {
+	path := backend.FormatURLPath("/data/"+version+"/summary/%s?type=city&key=%s", id, c.Key)
+	city := &City{}
 	err := c.B.Call(http.MethodGet, path, c.Key, city)
 	return city, err
 }

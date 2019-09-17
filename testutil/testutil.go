@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"sync"
 )
 
@@ -23,4 +24,9 @@ func DefaultHandler() http.HandlerFunc {
 func StartServer(handler http.HandlerFunc) {
 	server := httptest.NewServer(handler)
 	ServerAddr = "http://" + server.Listener.Addr().String()
+}
+
+func GetDirectoryPath() string {
+	wd, _ := os.Getwd()
+	return wd
 }
