@@ -38,8 +38,50 @@ func TestGetPropertyByID(t *testing.T) {
 	property, err := c.GetPropertyByFSID("100032470544")
 	assert.Nil(t, err)
 	assert.NotNil(t, property)
+}
 
-	// 	property, err = c.GetPropertyByLatLng(39.4419892114799, -75.6453718684964)
-	// 	assert.Nil(t, err)
-	// 	assert.NotNil(t, property)
+func TestGetPropertyByAddress(t *testing.T) {
+	testutil.Once.Do(func() {
+		testutil.StartServer(summaryHandler())
+	})
+	testBackend.URL = testutil.ServerAddr
+	c := &Client{
+		B:   testBackend,
+		Key: "test",
+	}
+
+	summaryResponse, err := c.GetPropertyByAddress("just a test")
+	assert.Nil(t, err)
+	assert.NotNil(t, summaryResponse)
+
+	want := &Summary{
+		FSID:    summaryResponse.FSID,
+		Results: summaryResponse.Results,
+		Type:    summaryResponse.Type,
+	}
+
+	assert.Equal(t, want, summaryResponse)
+}
+
+func TestGetPropertyByLatLng(t *testing.T) {
+	testutil.Once.Do(func() {
+		testutil.StartServer(summaryHandler())
+	})
+	testBackend.URL = testutil.ServerAddr
+	c := &Client{
+		B:   testBackend,
+		Key: "test",
+	}
+
+	summaryResponse, err := c.GetPropertyByLatLng(123.45, 67.8810)
+	assert.Nil(t, err)
+	assert.NotNil(t, summaryResponse)
+
+	want := &Summary{
+		FSID:    summaryResponse.FSID,
+		Results: summaryResponse.Results,
+		Type:    summaryResponse.Type,
+	}
+
+	assert.Equal(t, want, summaryResponse)
 }

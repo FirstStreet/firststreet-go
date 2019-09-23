@@ -58,7 +58,7 @@ type City struct {
 	Geometry *LocationGeometry      `json:"geometry"`
 }
 
-type SummaryResponse struct {
+type Summary struct {
 	FSID    int64          `json:"FSID"`
 	Type    string         `json:"type"`
 	Results SummaryResults `json:"results"`
@@ -76,22 +76,30 @@ type Client struct {
 }
 
 // GetPropertyByFSID retreives a Location Summary by its unique identifier
-func (c Client) GetPropertyByFSID(fsid string) (*SummaryResponse, error) {
+func (c Client) GetPropertyByFSID(fsid string) (*Summary, error) {
 	path := backend.FormatURLPath("/data/"+version+"/summary/%s?type=property&key=%s", fsid, c.Key)
-	summaryResponse := &SummaryResponse{}
+	summaryResponse := &Summary{}
 	err := c.B.Call(http.MethodGet, path, c.Key, summaryResponse)
 	return summaryResponse, err
 }
 
 // GetPropertyByLatLng pulls a parcel by lat lng
-func (c Client) GetPropertyByLatLng(lat, lng float64) (*Property, error) {
+func (c Client) GetPropertyByLatLng(lat, lng float64) (*Summary, error) {
 	latStr := strconv.FormatFloat(lat, 'f', -1, 64)
 	lngStr := strconv.FormatFloat(lng, 'f', -1, 64)
 
 	path := backend.FormatURLPath("/data/"+version+"/summary?type=property&key=%s&lat=%s&lng=%s", c.Key, latStr, lngStr)
-	property := &Property{}
-	err := c.B.Call(http.MethodGet, path, c.Key, property)
-	return property, err
+	summaryResponse := &Summary{}
+	err := c.B.Call(http.MethodGet, path, c.Key, summaryResponse)
+	return summaryResponse, err
+}
+
+// GetPropertyByAddress pulls a parcel by lat lng
+func (c Client) GetPropertyByAddress(address string) (*Summary, error) {
+	path := backend.FormatURLPath("/data/"+version+"/summary?locationType=property&key=%s&address=%s", c.Key, address)
+	summaryResponse := &Summary{}
+	err := c.B.Call(http.MethodGet, path, c.Key, summaryResponse)
+	return summaryResponse, err
 }
 
 // GetCityByID retreives a City Parcel by its unique identifier
@@ -100,4 +108,8 @@ func (c Client) GetCityByID(id string) (*City, error) {
 	city := &City{}
 	err := c.B.Call(http.MethodGet, path, c.Key, city)
 	return city, err
+}
+
+func (s Summary) Location() Location {
+	return s.Results.Location
 }

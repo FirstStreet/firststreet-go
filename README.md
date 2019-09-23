@@ -43,7 +43,7 @@ The risk summary API provides metadata and risks summary for a given `location`.
 
 **Property**
 
-- GetPropertyByID(ID `string`) - Retreives a `ParcelProperty` by specific ID
+- GetPropertyByFSID(FSID `string`) - Retreives a `ParcelProperty` by specific ID
 - GetPropertyByLatLng(lat `float64`, lng `float64`) - Retreives a `ParcelProperty` by a coordinate
 
 **City**
