@@ -1,4 +1,4 @@
-package floodiq
+package firststreet
 
 import (
 	// "log"
