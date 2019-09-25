@@ -1,10 +1,10 @@
-package floodiq
+package firststreet
 
 import (
 	"net/http"
 
 	"github.com/firststreet/firststreet-go/backend"
-	"github.com/firststreet/firststreet-go/parcel"
+	"github.com/firststreet/firststreet-go/summary"
 )
 
 const (
@@ -16,13 +16,13 @@ const (
 
 // The API provides interfaces to Flood iQ services
 type API struct {
-	Parcel    *parcel.Client
+	Summary   *summary.Client
 	RateLimit *backend.RateLimit
 }
 
 // InitAPI initalizes services-level APIs
 func (a *API) InitAPI(key string, backend *backend.Backend) {
-	a.Parcel = &parcel.Client{B: backend, Key: key}
+	a.Summary = &summary.Client{B: backend, Key: key}
 }
 
 // newAPI creates an API for usage

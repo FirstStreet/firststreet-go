@@ -5,6 +5,7 @@ import (
 	// "net/http/httptest"
 	// "sync"
 	"testing"
+
 	assert "github.com/stretchr/testify/require"
 )
 
@@ -19,12 +20,12 @@ import (
 func TestAPIInit(t *testing.T) {
 	a := &API{}
 	a.InitAPI("abc123", nil)
-	assert.Equal(t, "abc123", a.Parcel.Key)
+	assert.Equal(t, "abc123", a.Summary.Key)
 }
 
 func TestAPINew(t *testing.T) {
 	api := newAPI("abc123", nil)
-	assert.Equal(t, "abc123", api.Parcel.Key)
+	assert.Equal(t, "abc123", api.Summary.Key)
 }
 
 // func TestIntegration(t *testing.T) {

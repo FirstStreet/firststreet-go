@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/firststreet/floodiq-go/backend"
+	"github.com/firststreet/firststreet-go/backend"
 )
 
 // TilePointCoordinate indicates a X, Y, or Z value

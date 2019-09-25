@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/firststreet/floodiq-go/backend"
-	"github.com/firststreet/floodiq-go/jsonize"
+	"github.com/firststreet/firststreet-go/backend"
+	"github.com/firststreet/firststreet-go/jsonize"
 	geojson "github.com/paulmach/go.geojson"
 )
 

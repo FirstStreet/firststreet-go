@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/firststreet/floodiq-go/backend"
-	"github.com/firststreet/floodiq-go/testutil"
+	"github.com/firststreet/firststreet-go/backend"
+	"github.com/firststreet/firststreet-go/testutil"
 	assert "github.com/stretchr/testify/require"
 )
 
