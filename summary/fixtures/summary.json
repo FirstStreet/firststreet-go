@@ -1,6 +1,5 @@
 {
   "FSID": 100032470544,
-  "type": "property",
   "results": {
     "location": {
       "FSID": 100032470544,
@@ -88,7 +87,7 @@
             39.4419892114799
           ]
         },
-        "bounds": {
+        "bbox": {
           "type": "Polygon",
           "coordinates": [
             [

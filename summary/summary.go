@@ -36,14 +36,7 @@ type Property struct {
 	State         jsonize.JsonNullString `json:"state"`
 	Geometry      *LocationGeometry      `json:"geometry"`
 	Elevation     jsonize.JsonNullInt64  `json:"elevation"`
-	// @TODO: FemaZone should be broken down into its own struct
-	// There could also be more than 1 femazones
-	FemaZone   jsonize.JsonNullString `json:"femaZone"`
-	LotSize    jsonize.JsonNullInt64  `json:"lotSize"`
-	HomeSize   jsonize.JsonNullInt64  `json:"floorArea"`
-	LandUse    jsonize.JsonNullString `json:"landUse"`
-	CountyFIPS jsonize.JsonNullInt64  `json:"countyFips"`
-	Distance   float64                `json:"distance"`
+	CountyFIPS    jsonize.JsonNullInt64  `json:"countyFips"`
 }
 
 type PropertyCity struct {
@@ -60,7 +53,6 @@ type City struct {
 
 type Summary struct {
 	FSID    int64          `json:"FSID"`
-	Type    string         `json:"type"`
 	Results SummaryResults `json:"results"`
 }
 

@@ -57,7 +57,6 @@ func TestGetPropertyByAddress(t *testing.T) {
 	want := &Summary{
 		FSID:    summaryResponse.FSID,
 		Results: summaryResponse.Results,
-		Type:    summaryResponse.Type,
 	}
 
 	assert.Equal(t, want, summaryResponse)
@@ -80,7 +79,6 @@ func TestGetPropertyByLatLng(t *testing.T) {
 	want := &Summary{
 		FSID:    summaryResponse.FSID,
 		Results: summaryResponse.Results,
-		Type:    summaryResponse.Type,
 	}
 
 	assert.Equal(t, want, summaryResponse)
