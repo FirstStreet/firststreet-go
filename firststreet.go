@@ -33,7 +33,7 @@ func newAPI(key string, backend *backend.Backend) *API {
 }
 
 func New(key string) *API {
-	// The backend is used to interact with the Flood iQ API
+	// The backend is used to interact with the First StreetAPI
 	backend := &backend.Backend{
 		HTTPClient: &http.Client{},
 		URL:        DefaultHost,
