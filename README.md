@@ -20,7 +20,8 @@ Next, import it into your project:
 
 ```go
 import (
-  "github.com/firststreet/firststreet-go
+  firststreet "github.com/firststreet/firststreet-go"
+  client "github.com/firststreet/firststreet-go/client"
 )
 ```
 
@@ -31,15 +32,18 @@ import (
 ### Initalizing the client
 
 ```go
-// Create a new Flood iq API Client
-fsf := firststreet.New("api-key")
+// Create a new backend
+backend := firststreet.NewBackend("api-key")
+
+// Create the API client
+fs := client.New(backend)
 ```
 
 ### **Risk Summary**
 
 The risk summary API provides metadata and risks summary for a given `location`.
 
-`fsf.Summary.<method>`
+`fsf.DataSummary.<method>`
 
 **Property**
 

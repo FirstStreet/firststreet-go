@@ -25,6 +25,7 @@ type RateLimit struct {
 type Backend struct {
 	HTTPClient *http.Client
 	RateLimit  *RateLimit
+	Key        string
 	URL        string
 	Version    string
 }
@@ -108,8 +109,8 @@ func checkStatusCode(r *http.Response) error {
 }
 
 // Call deserializes a requested url and binds it to an interface
-func (b *Backend) Call(method, path, key string, v interface{}) error {
-	req, err := b.NewRequest(method, path, key, "application/x-www-form-urlencoded")
+func (b *Backend) Call(method, path string, v interface{}) error {
+	req, err := b.NewRequest(method, path, "application/x-www-form-urlencoded")
 	if err != nil {
 		return err
 	}
@@ -122,8 +123,8 @@ func (b *Backend) Call(method, path, key string, v interface{}) error {
 }
 
 // CallBytes returns raw bytes from a call
-func (b *Backend) CallBytes(method, path, key string) ([]byte, error) {
-	req, err := b.NewRequest(method, path, key, "application/x-www-form-urlencoded")
+func (b *Backend) CallBytes(method, path string) ([]byte, error) {
+	req, err := b.NewRequest(method, path, "application/x-www-form-urlencoded")
 	if err != nil {
 		return nil, err
 	}
@@ -137,7 +138,7 @@ func (b *Backend) CallBytes(method, path, key string) ([]byte, error) {
 	return bytes, nil
 }
 
-func (b *Backend) NewRequest(method, path, key, contentType string) (*http.Request, error) {
+func (b *Backend) NewRequest(method, path, contentType string) (*http.Request, error) {
 	if !strings.HasPrefix(path, "/") {
 		path = "/" + path
 	}
@@ -150,7 +151,7 @@ func (b *Backend) NewRequest(method, path, key, contentType string) (*http.Reque
 		return nil, err
 	}
 
-	authorization := "Bearer " + key
+	authorization := "Bearer " + b.Key
 
 	req.Header.Add("Authorization", authorization)
 	req.Header.Add("Content-Type", contentType)

@@ -85,7 +85,7 @@ func (c Client) Hurricane(z, x, y int32, floodType FloodType, floodYear int32) (
 	}
 
 	path := backend.FormatURLPath("/data/"+version+"/hurricane/%s/%s/%s.png?&type=%s&year=%s", tile.Metadata.Z.String(), tile.Metadata.X.String(), tile.Metadata.Y.String(), string(tile.Metadata.FloodType), "2018")
-	bytes, err := c.B.CallBytes(http.MethodGet, path, c.Key)
+	bytes, err := c.B.CallBytes(http.MethodGet, path)
 	if err != nil {
 		return nil, err
 	}

@@ -1,4 +1,4 @@
-package summary
+package datasummary
 
 import (
 	"fmt"
@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"testing"
 
+	firststreet "github.com/firststreet/firststreet-go"
 	"github.com/firststreet/firststreet-go/backend"
 	"github.com/firststreet/firststreet-go/testutil"
 	assert "github.com/stretchr/testify/require"
@@ -13,6 +14,7 @@ import (
 
 var testBackend = &backend.Backend{
 	HTTPClient: &http.Client{},
+	Key:        "test",
 }
 
 func summaryHandler() http.HandlerFunc {
@@ -32,8 +34,7 @@ func TestGetPropertyByID(t *testing.T) {
 	})
 	testBackend.URL = testutil.ServerAddr
 	c := &Client{
-		B:   testBackend,
-		Key: "test",
+		B: testBackend,
 	}
 	property, err := c.GetPropertyByFSID("100032470544")
 	assert.Nil(t, err)
@@ -46,15 +47,14 @@ func TestGetPropertyByAddress(t *testing.T) {
 	})
 	testBackend.URL = testutil.ServerAddr
 	c := &Client{
-		B:   testBackend,
-		Key: "test",
+		B: testBackend,
 	}
 
 	summaryResponse, err := c.GetPropertyByAddress("just a test")
 	assert.Nil(t, err)
 	assert.NotNil(t, summaryResponse)
 
-	want := &Summary{
+	want := &firststreet.Summary{
 		FSID:    summaryResponse.FSID,
 		Results: summaryResponse.Results,
 	}
@@ -68,15 +68,14 @@ func TestGetPropertyByLatLng(t *testing.T) {
 	})
 	testBackend.URL = testutil.ServerAddr
 	c := &Client{
-		B:   testBackend,
-		Key: "test",
+		B: testBackend,
 	}
 
 	summaryResponse, err := c.GetPropertyByLatLng(123.45, 67.8810)
 	assert.Nil(t, err)
 	assert.NotNil(t, summaryResponse)
 
-	want := &Summary{
+	want := &firststreet.Summary{
 		FSID:    summaryResponse.FSID,
 		Results: summaryResponse.Results,
 	}
