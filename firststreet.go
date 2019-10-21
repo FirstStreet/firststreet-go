@@ -6,8 +6,7 @@ import (
 	"github.com/firststreet/firststreet-go/backend"
 )
 
-var Key string
-
+// These are currently immutable, future versions will allow modifications of the two
 const (
 	// DefaultHost is where all API requests are handled
 	DefaultHost = "https://api.firststreet.org"

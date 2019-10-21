@@ -10,18 +10,18 @@ For more in-depth guides, usage and API access, please see the documentation at 
 
 ## Installation
 
-First install firststreet-go:
+First install `firststreet-go`:
 
 ```
 go get -u github.com/firststreet/firststreet-go
 ```
 
-Next, import it into your project:
+Next, import `firststreet` and `client` to your project. `firststreet` is the backend that defines which version and server the client will use.
 
 ```go
 import (
-  firststreet "github.com/firststreet/firststreet-go"
-  client "github.com/firststreet/firststreet-go/client"
+  "github.com/firststreet/firststreet-go"
+  "github.com/firststreet/firststreet-go/client"
 )
 ```
 
