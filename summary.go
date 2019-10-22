@@ -24,7 +24,7 @@ type FloodRisks struct {
 type LocationGeometry struct {
 	Polygon geojson.Geometry `json:"polygon"`
 	Center  geojson.Geometry `json:"center"`
-	Bounds  geojson.Geometry `json:"bounds"`
+	BBox    geojson.Geometry `json:"bbox"`
 }
 
 type Property struct {

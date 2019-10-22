@@ -24,6 +24,7 @@ func summaryPropertyHandler() http.HandlerFunc {
 	}
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// nolint
 		w.Write(summarySample)
 	})
 }
