@@ -1,0 +1,71 @@
+{
+  "FSID": 111134,
+  "results": {
+    "location": {
+      "FSID": 111134,
+      "primaryNumber": "1327",
+      "streetName": "AUTUMN",
+      "lastUpdated": "2019-10-15T03:58:45.152801Z",
+      "predirection": null,
+      "postdirection": null,
+      "zipCode": 32034,
+      "city": {
+        "FSID": 1222175,
+        "Name": "Fernandina Beach"
+      },
+      "state": "Florida",
+      "geometry": {},
+      "femaZone": null,
+      "lotSize": null,
+      "floorArea": null,
+      "landUse": null,
+      "distance": 0
+    },
+    "firstFloodRisk": {
+      "floodID": "kt",
+      "year": 2018
+    },
+    "floodRisks": [
+      {
+        "year": 2023,
+        "floodID": [
+          "em",
+          "kt",
+          "c5",
+          "c3",
+          "c1"
+        ]
+      },
+      {
+        "year": 2028,
+        "floodID": [
+          "em",
+          "kt",
+          "c5",
+          "c3",
+          "c1"
+        ]
+      },
+      {
+        "year": 2033,
+        "floodID": [
+          "em",
+          "kt",
+          "c5",
+          "c3",
+          "c1"
+        ]
+      },
+      {
+        "year": 2018,
+        "floodID": [
+          "em",
+          "kt",
+          "c5",
+          "c3",
+          "c1"
+        ]
+      }
+    ]
+  }
+}

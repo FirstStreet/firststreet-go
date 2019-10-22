@@ -17,28 +17,28 @@ type Client struct {
 }
 
 // GetPropertyByFSID retreives a Location Summary by its unique identifier
-func (c Client) GetPropertyByFSID(fsid string) (*firststreet.Summary, error) {
+func (c Client) GetPropertyByFSID(fsid string) (*firststreet.SummaryProperty, error) {
 	path := backend.FormatURLPath("/data/"+version+"/summary/property/%s", fsid)
-	summaryResponse := &firststreet.Summary{}
+	summaryResponse := &firststreet.SummaryProperty{}
 	err := c.B.Call(http.MethodGet, path, summaryResponse)
 	return summaryResponse, err
 }
 
 // GetPropertyByLatLng pulls a parcel by lat lng
-func (c Client) GetPropertyByLatLng(lat, lng float64) (*firststreet.Summary, error) {
+func (c Client) GetPropertyByLatLng(lat, lng float64) (*firststreet.SummaryProperty, error) {
 	latStr := strconv.FormatFloat(lat, 'f', -1, 64)
 	lngStr := strconv.FormatFloat(lng, 'f', -1, 64)
 
 	path := backend.FormatURLPath("/data/"+version+"/summary/property?lat=%s&lng=%s", latStr, lngStr)
-	summaryResponse := &firststreet.Summary{}
+	summaryResponse := &firststreet.SummaryProperty{}
 	err := c.B.Call(http.MethodGet, path, summaryResponse)
 	return summaryResponse, err
 }
 
 // GetPropertyByAddress pulls a parcel by lat lng
-func (c Client) GetPropertyByAddress(address string) (*firststreet.Summary, error) {
+func (c Client) GetPropertyByAddress(address string) (*firststreet.SummaryProperty, error) {
 	path := backend.FormatURLPath("/data/"+version+"/summary/property?address=%s", address)
-	summaryResponse := &firststreet.Summary{}
+	summaryResponse := &firststreet.SummaryProperty{}
 	err := c.B.Call(http.MethodGet, path, summaryResponse)
 	return summaryResponse, err
 }

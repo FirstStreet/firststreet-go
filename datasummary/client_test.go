@@ -17,8 +17,8 @@ var testBackend = &backend.Backend{
 	Key:        "test",
 }
 
-func summaryHandler() http.HandlerFunc {
-	summarySample, err := ioutil.ReadFile(testutil.GetDirectoryPath() + "/fixtures/summary.json")
+func summaryPropertyHandler() http.HandlerFunc {
+	summarySample, err := ioutil.ReadFile(testutil.GetDirectoryPath() + "/fixtures/summary-property.json")
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -28,9 +28,19 @@ func summaryHandler() http.HandlerFunc {
 	})
 }
 
+func summaryPropertyNullHandler() http.HandlerFunc {
+	summarySample, err := ioutil.ReadFile(testutil.GetDirectoryPath() + "/fixtures/summary-property-null.json")
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Write(summarySample)
+	})
+}
 func TestGetPropertyByID(t *testing.T) {
 	testutil.Once.Do(func() {
-		testutil.StartServer(summaryHandler())
+		testutil.StartServer(summaryPropertyHandler())
 	})
 	testBackend.URL = testutil.ServerAddr
 	c := &Client{
@@ -41,9 +51,21 @@ func TestGetPropertyByID(t *testing.T) {
 	assert.NotNil(t, property)
 }
 
+func TestGetPropertyByIDNull(t *testing.T) {
+	testutil.Once.Do(func() {
+		testutil.StartServer(summaryPropertyNullHandler())
+	})
+	testBackend.URL = testutil.ServerAddr
+	c := &Client{
+		B: testBackend,
+	}
+	property, err := c.GetPropertyByFSID("100032470544")
+	assert.Nil(t, err)
+	assert.NotNil(t, property)
+}
 func TestGetPropertyByAddress(t *testing.T) {
 	testutil.Once.Do(func() {
-		testutil.StartServer(summaryHandler())
+		testutil.StartServer(summaryPropertyHandler())
 	})
 	testBackend.URL = testutil.ServerAddr
 	c := &Client{
@@ -54,7 +76,27 @@ func TestGetPropertyByAddress(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, summaryResponse)
 
-	want := &firststreet.Summary{
+	want := &firststreet.SummaryProperty{
+		FSID:    summaryResponse.FSID,
+		Results: summaryResponse.Results,
+	}
+
+	assert.Equal(t, want, summaryResponse)
+}
+func TestGetPropertyByAddressNull(t *testing.T) {
+	testutil.Once.Do(func() {
+		testutil.StartServer(summaryPropertyNullHandler())
+	})
+	testBackend.URL = testutil.ServerAddr
+	c := &Client{
+		B: testBackend,
+	}
+
+	summaryResponse, err := c.GetPropertyByAddress("just a test")
+	assert.Nil(t, err)
+	assert.NotNil(t, summaryResponse)
+
+	want := &firststreet.SummaryProperty{
 		FSID:    summaryResponse.FSID,
 		Results: summaryResponse.Results,
 	}
@@ -64,7 +106,7 @@ func TestGetPropertyByAddress(t *testing.T) {
 
 func TestGetPropertyByLatLng(t *testing.T) {
 	testutil.Once.Do(func() {
-		testutil.StartServer(summaryHandler())
+		testutil.StartServer(summaryPropertyHandler())
 	})
 	testBackend.URL = testutil.ServerAddr
 	c := &Client{
@@ -75,7 +117,28 @@ func TestGetPropertyByLatLng(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, summaryResponse)
 
-	want := &firststreet.Summary{
+	want := &firststreet.SummaryProperty{
+		FSID:    summaryResponse.FSID,
+		Results: summaryResponse.Results,
+	}
+
+	assert.Equal(t, want, summaryResponse)
+}
+
+func TestGetPropertyByLatLngNull(t *testing.T) {
+	testutil.Once.Do(func() {
+		testutil.StartServer(summaryPropertyNullHandler())
+	})
+	testBackend.URL = testutil.ServerAddr
+	c := &Client{
+		B: testBackend,
+	}
+
+	summaryResponse, err := c.GetPropertyByLatLng(123.45, 67.8810)
+	assert.Nil(t, err)
+	assert.NotNil(t, summaryResponse)
+
+	want := &firststreet.SummaryProperty{
 		FSID:    summaryResponse.FSID,
 		Results: summaryResponse.Results,
 	}
