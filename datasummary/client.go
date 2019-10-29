@@ -65,6 +65,7 @@ func (c Client) GetCityByLatLng(lat, lng float64) (*firststreet.SummaryCity, err
 // GetCityByAddress pulls a parcel by lat lng
 func (c Client) GetCityByAddress(address string) (*firststreet.SummaryCity, error) {
 	path := backend.FormatURLPath("/data/"+version+"/summary/property?address=%s", address)
+
 	summaryResponse := &firststreet.SummaryCity{}
 	err := c.B.Call(http.MethodGet, path, summaryResponse)
 	return summaryResponse, err

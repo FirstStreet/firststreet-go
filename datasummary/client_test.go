@@ -172,3 +172,46 @@ func TestGetCityByFSID(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, property)
 }
+
+func TestGetCityByLatLng(t *testing.T) {
+	testutil.Once.Do(func() {
+		testutil.StartServer(summaryCityHandler())
+	})
+	testBackend.URL = testutil.ServerAddr
+	c := &Client{
+		B: testBackend,
+	}
+
+	summaryResponse, err := c.GetCityByLatLng(123.45, 67.8810)
+	assert.Nil(t, err)
+	assert.NotNil(t, summaryResponse)
+
+	want := &firststreet.SummaryCity{
+		FSID:    summaryResponse.FSID,
+		Results: summaryResponse.Results,
+	}
+
+	assert.Equal(t, want, summaryResponse)
+}
+
+func TestGetCityByAddress(t *testing.T) {
+	testutil.Once.Do(func() {
+		testutil.StartServer(summaryCityHandler())
+	})
+	testBackend.URL = testutil.ServerAddr
+	c := &Client{
+		B: testBackend,
+	}
+
+	summaryResponse, err := c.GetCityByAddress("just a test")
+	assert.Nil(t, err)
+	assert.NotNil(t, summaryResponse)
+
+	want := &firststreet.SummaryCity{
+		FSID:    summaryResponse.FSID,
+		Results: summaryResponse.Results,
+	}
+
+	assert.Equal(t, want, summaryResponse)
+}
+
