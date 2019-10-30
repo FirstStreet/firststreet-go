@@ -1,0 +1,307 @@
+{
+  "FSID": 450350219571,
+  "results": [{
+      "floodType": "hurricane storm surge",
+      "floodID": "c1",
+      "data": [{
+          "year": 2018,
+          "data": [{
+              "type": "maxdepth",
+              "unit": "meters",
+              "value": 0
+            },
+            {
+              "type": "lot",
+              "unit": "percent",
+              "value": 0
+            },
+            {
+              "type": "neighborhood",
+              "unit": "percent",
+              "value": 0.17557
+            },
+            {
+              "type": "road",
+              "unit": "percent",
+              "value": 0.09307
+            }
+          ]
+        },
+        {
+          "year": 2023,
+          "data": [{
+              "type": "maxdepth",
+              "unit": "meters",
+              "value": 0
+            },
+            {
+              "type": "lot",
+              "unit": "percent",
+              "value": 0
+            },
+            {
+              "type": "neighborhood",
+              "unit": "percent",
+              "value": 0.18321
+            },
+            {
+              "type": "road",
+              "unit": "percent",
+              "value": 0.09554
+            }
+          ]
+        },
+        {
+          "year": 2028,
+          "data": [{
+              "type": "maxdepth",
+              "unit": "meters",
+              "value": 0
+            },
+            {
+              "type": "lot",
+              "unit": "percent",
+              "value": 0
+            },
+            {
+              "type": "neighborhood",
+              "unit": "percent",
+              "value": 0.19847
+            },
+            {
+              "type": "road",
+              "unit": "percent",
+              "value": 0.09909
+            }
+          ]
+        },
+        {
+          "year": 2033,
+          "data": [{
+              "type": "maxdepth",
+              "unit": "meters",
+              "value": 0
+            },
+            {
+              "type": "lot",
+              "unit": "percent",
+              "value": 0
+            },
+            {
+              "type": "neighborhood",
+              "unit": "percent",
+              "value": 0.20992
+            },
+            {
+              "type": "road",
+              "unit": "percent",
+              "value": 0.10318
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "floodType": "hurricane storm surge",
+      "floodID": "c5",
+      "data": [{
+          "year": 2018,
+          "data": [{
+              "type": "maxdepth",
+              "unit": "meters",
+              "value": 11
+            },
+            {
+              "type": "lot",
+              "unit": "percent",
+              "value": 1
+            },
+            {
+              "type": "neighborhood",
+              "unit": "percent",
+              "value": 1
+            },
+            {
+              "type": "road",
+              "unit": "percent",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "year": 2023,
+          "data": [{
+              "type": "maxdepth",
+              "unit": "meters",
+              "value": 11
+            },
+            {
+              "type": "lot",
+              "unit": "percent",
+              "value": 1
+            },
+            {
+              "type": "neighborhood",
+              "unit": "percent",
+              "value": 1
+            },
+            {
+              "type": "road",
+              "unit": "percent",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "year": 2028,
+          "data": [{
+              "type": "maxdepth",
+              "unit": "meters",
+              "value": 11
+            },
+            {
+              "type": "lot",
+              "unit": "percent",
+              "value": 1
+            },
+            {
+              "type": "neighborhood",
+              "unit": "percent",
+              "value": 1
+            },
+            {
+              "type": "road",
+              "unit": "percent",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "year": 2033,
+          "data": [{
+              "type": "maxdepth",
+              "unit": "meters",
+              "value": 11
+            },
+            {
+              "type": "lot",
+              "unit": "percent",
+              "value": 1
+            },
+            {
+              "type": "neighborhood",
+              "unit": "percent",
+              "value": 1
+            },
+            {
+              "type": "road",
+              "unit": "percent",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "floodType": "hurricane storm surge",
+      "floodID": "c3",
+      "data": [{
+          "year": 2018,
+          "data": [{
+              "type": "maxdepth",
+              "unit": "meters",
+              "value": 7
+            },
+            {
+              "type": "lot",
+              "unit": "percent",
+              "value": 1
+            },
+            {
+              "type": "neighborhood",
+              "unit": "percent",
+              "value": 0.98092
+            },
+            {
+              "type": "road",
+              "unit": "percent",
+              "value": 0.90534
+            }
+          ]
+        },
+        {
+          "year": 2023,
+          "data": [{
+              "type": "maxdepth",
+              "unit": "meters",
+              "value": 7
+            },
+            {
+              "type": "lot",
+              "unit": "percent",
+              "value": 1
+            },
+            {
+              "type": "neighborhood",
+              "unit": "percent",
+              "value": 0.98092
+            },
+            {
+              "type": "road",
+              "unit": "percent",
+              "value": 0.9098
+            }
+          ]
+        },
+        {
+          "year": 2028,
+          "data": [{
+              "type": "maxdepth",
+              "unit": "meters",
+              "value": 7
+            },
+            {
+              "type": "lot",
+              "unit": "percent",
+              "value": 1
+            },
+            {
+              "type": "neighborhood",
+              "unit": "percent",
+              "value": 0.98092
+            },
+            {
+              "type": "road",
+              "unit": "percent",
+              "value": 0.91659
+            }
+          ]
+        },
+        {
+          "year": 2033,
+          "data": [{
+              "type": "maxdepth",
+              "unit": "meters",
+              "value": 7
+            },
+            {
+              "type": "lot",
+              "unit": "percent",
+              "value": 1
+            },
+            {
+              "type": "neighborhood",
+              "unit": "percent",
+              "value": 0.98473
+            },
+            {
+              "type": "road",
+              "unit": "percent",
+              "value": 0.92386
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

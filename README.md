@@ -49,12 +49,31 @@ The risk summary API provides metadata and risks summary for a given `location`.
 
 - GetPropertyByFSID(FSID `string`) - Retreives a `ParcelProperty` by specific ID
 - GetPropertyByLatLng(lat `float64`, lng `float64`) - Retreives a `ParcelProperty` by a coordinate
+- GetPropertyByAddress(address `string`) - Retrieves a `ParcelProperty` by address lookup
 
 **City**
 
 - GetCityByID(ID `string`) - Retreives a `ParcelProperty` by specific ID
 - GetCityByLatLng(lat `float64`, lng `float64`) - Retreives a `ParcelProperty` by a coordinate
+- GetCityByAddress(address `string`) - Retrieves a `ParcelProperty` by address lookup
 
+### **Hurricane Risk**
+
+The hurricane risk API provides hurricane risk for a given `location`.
+
+`fsf.Hurricane.<method>`
+
+**Property**
+
+- GetPropertyByFSID(FSID `string`) - Retreives Hurricane Risk for a property by specific ID
+- GetPropertyByLatLng(lat `float64`, lng `float64`) - Retreives Hurricane Risk for a property by a coordinate
+- GetPropertyByAddress(lat `float64`, lng `float64`) - Retreives Hurricane Risk for a property by address lookup
+
+**City**
+
+- GetCityByID(ID `string`) - Retreives Hurricane Risk for a city by specific ID
+- GetCityByLatLng(lat `float64`, lng `float64`) - Retreives a Hurricane Risk for a city by a coordinate
+- GetCityByAddress(lat `float64`, lng `float64`) - Retreives Hurricane Risk for a city by address lookup
 
 ### Errors
 
