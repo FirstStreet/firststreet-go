@@ -1,0 +1,24 @@
+{
+  "FSID": 450350219571,
+  "results": [{
+    "floodType": "tidal flooding",
+    "floodID": "kt",
+    "data": [{
+        "year": 2018,
+        "data": [{
+          "type": "loss_total",
+          "unit": "dollars",
+          "value": 2008
+        }]
+      },
+      {
+        "year": 2033,
+        "data": [{
+          "type": "loss_total",
+          "unit": "dollars",
+          "value": 2033
+        }]
+      }
+    ]
+  }]
+}

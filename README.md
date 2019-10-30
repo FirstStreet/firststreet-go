@@ -75,6 +75,42 @@ The hurricane risk API provides hurricane risk for a given `location`.
 - GetCityByLatLng(lat `float64`, lng `float64`) - Retreives a Hurricane Risk for a city by a coordinate
 - GetCityByAddress(lat `float64`, lng `float64`) - Retreives Hurricane Risk for a city by address lookup
 
+### **Tidal Risk**
+
+The Tidal risk API provides tidal risk for a given `location`.
+
+`fsf.Tidal.<method>`
+
+**Property**
+
+- GetPropertyByFSID(FSID `string`) - Retreives Tidal Risk for a property by specific ID
+- GetPropertyByLatLng(lat `float64`, lng `float64`) - Retreives Tidal Risk for a property by a coordinate
+- GetPropertyByAddress(lat `float64`, lng `float64`) - Retreives Tidal Risk for a property by address lookup
+
+**City**
+
+- GetCityByID(ID `string`) - Retreives Tidal Risk for a city by specific ID
+- GetCityByLatLng(lat `float64`, lng `float64`) - Retreives a Tidal Risk for a city by a coordinate
+- GetCityByAddress(lat `float64`, lng `float64`) - Retreives Tidal Risk for a city by address lookup
+
+### **Market Value Impact**
+
+The Market Value Impact API provides tidal risk for a given `location`.
+
+`fsf.MVI.<method>`
+
+**Property**
+
+- GetPropertyByFSID(FSID `string`) - Retreives Market Value Impact for a property by specific ID
+- GetPropertyByLatLng(lat `float64`, lng `float64`) - Retreives Market Value Impact for a property by a coordinate
+- GetPropertyByAddress(lat `float64`, lng `float64`) - Retreives Market Value Impact for a property by address lookup
+
+**City**
+
+- GetCityByID(ID `string`) - Retreives Market Value Impact for a city by specific ID
+- GetCityByLatLng(lat `float64`, lng `float64`) - Retreives a Market Value Impact for a city by a coordinate
+- GetCityByAddress(lat `float64`, lng `float64`) - Retreives Market Value Impact for a city by address lookup
+
 ### Errors
 
 All errors will have a `Code`, `Status` and `Message` attached to it.

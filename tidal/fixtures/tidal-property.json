@@ -1,0 +1,206 @@
+{
+  "FSID": 450350219571,
+  "results": [{
+      "floodType": "tidal flooding",
+      "floodID": "em",
+      "data": [{
+          "year": 2018,
+          "data": [{
+              "type": "maxdepth",
+              "unit": "meters",
+              "value": 0
+            },
+            {
+              "type": "lot",
+              "unit": "percent",
+              "value": 0
+            },
+            {
+              "type": "neighborhood",
+              "unit": "percent",
+              "value": 0.09542
+            },
+            {
+              "type": "road",
+              "unit": "percent",
+              "value": 0.05723
+            }
+          ]
+        },
+        {
+          "year": 2023,
+          "data": [{
+              "type": "maxdepth",
+              "unit": "meters",
+              "value": 0
+            },
+            {
+              "type": "lot",
+              "unit": "percent",
+              "value": 0
+            },
+            {
+              "type": "neighborhood",
+              "unit": "percent",
+              "value": 0.09924
+            },
+            {
+              "type": "road",
+              "unit": "percent",
+              "value": 0.0619
+            }
+          ]
+        },
+        {
+          "year": 2028,
+          "data": [{
+              "type": "maxdepth",
+              "unit": "meters",
+              "value": 0
+            },
+            {
+              "type": "lot",
+              "unit": "percent",
+              "value": 0
+            },
+            {
+              "type": "neighborhood",
+              "unit": "percent",
+              "value": 0.12977
+            },
+            {
+              "type": "road",
+              "unit": "percent",
+              "value": 0.06892
+            }
+          ]
+        },
+        {
+          "year": 2033,
+          "data": [{
+              "type": "maxdepth",
+              "unit": "meters",
+              "value": 0
+            },
+            {
+              "type": "lot",
+              "unit": "percent",
+              "value": 0
+            },
+            {
+              "type": "neighborhood",
+              "unit": "percent",
+              "value": 0.14885
+            },
+            {
+              "type": "road",
+              "unit": "percent",
+              "value": 0.07514
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "floodType": "tidal flooding",
+      "floodID": "kt",
+      "data": [{
+          "year": 2018,
+          "data": [{
+              "type": "maxdepth",
+              "unit": "meters",
+              "value": 0
+            },
+            {
+              "type": "lot",
+              "unit": "percent",
+              "value": 0
+            },
+            {
+              "type": "neighborhood",
+              "unit": "percent",
+              "value": 0.05725
+            },
+            {
+              "type": "road",
+              "unit": "percent",
+              "value": 0.02527
+            }
+          ]
+        },
+        {
+          "year": 2023,
+          "data": [{
+              "type": "maxdepth",
+              "unit": "meters",
+              "value": 0
+            },
+            {
+              "type": "lot",
+              "unit": "percent",
+              "value": 0
+            },
+            {
+              "type": "neighborhood",
+              "unit": "percent",
+              "value": 0.05725
+            },
+            {
+              "type": "road",
+              "unit": "percent",
+              "value": 0.02921
+            }
+          ]
+        },
+        {
+          "year": 2028,
+          "data": [{
+              "type": "maxdepth",
+              "unit": "meters",
+              "value": 0
+            },
+            {
+              "type": "lot",
+              "unit": "percent",
+              "value": 0
+            },
+            {
+              "type": "neighborhood",
+              "unit": "percent",
+              "value": 0.0687
+            },
+            {
+              "type": "road",
+              "unit": "percent",
+              "value": 0.03647
+            }
+          ]
+        },
+        {
+          "year": 2033,
+          "data": [{
+              "type": "maxdepth",
+              "unit": "meters",
+              "value": 0
+            },
+            {
+              "type": "lot",
+              "unit": "percent",
+              "value": 0
+            },
+            {
+              "type": "neighborhood",
+              "unit": "percent",
+              "value": 0.08015
+            },
+            {
+              "type": "road",
+              "unit": "percent",
+              "value": 0.04438
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

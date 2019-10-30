@@ -1,4 +1,4 @@
-package hurricane
+package marketvalueimpact
 
 import (
 	"fmt"
@@ -17,21 +17,21 @@ var testBackend = &backend.Backend{
 	Key:        "test",
 }
 
-func hurricanePropertyHandler() http.HandlerFunc {
-	hurricaneSample, err := ioutil.ReadFile(testutil.GetDirectoryPath() + "/fixtures/hurricane-property.json")
+func marketValueImpactPropertyHandler() http.HandlerFunc {
+	mviSample, err := ioutil.ReadFile(testutil.GetDirectoryPath() + "/fixtures/mvi-property.json")
 	if err != nil {
 		fmt.Println(err)
 	}
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// nolint
-		w.Write(hurricaneSample)
+		w.Write(mviSample)
 	})
 }
 
 func TestGetPropertyByID(t *testing.T) {
 	testutil.Once.Do(func() {
-		testutil.StartServer(hurricanePropertyHandler())
+		testutil.StartServer(marketValueImpactPropertyHandler())
 	})
 	testBackend.URL = testutil.ServerAddr
 	c := &Client{
@@ -44,7 +44,7 @@ func TestGetPropertyByID(t *testing.T) {
 
 func TestGetPropertyByAddress(t *testing.T) {
 	testutil.Once.Do(func() {
-		testutil.StartServer(hurricanePropertyHandler())
+		testutil.StartServer(marketValueImpactPropertyHandler())
 	})
 	testBackend.URL = testutil.ServerAddr
 	c := &Client{
@@ -55,7 +55,7 @@ func TestGetPropertyByAddress(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, response)
 
-	want := &firststreet.Hurricane{
+	want := &firststreet.MVI{
 		FSID:    response.FSID,
 		Results: response.Results,
 	}
@@ -65,7 +65,7 @@ func TestGetPropertyByAddress(t *testing.T) {
 
 func TestGetPropertyByLatLng(t *testing.T) {
 	testutil.Once.Do(func() {
-		testutil.StartServer(hurricanePropertyHandler())
+		testutil.StartServer(marketValueImpactPropertyHandler())
 	})
 	testBackend.URL = testutil.ServerAddr
 	c := &Client{
@@ -76,7 +76,7 @@ func TestGetPropertyByLatLng(t *testing.T) {
 	assert.Nil(t, err)
 	assert.NotNil(t, response)
 
-	want := &firststreet.Hurricane{
+	want := &firststreet.MVI{
 		FSID:    response.FSID,
 		Results: response.Results,
 	}
