@@ -101,9 +101,8 @@
       ]
     },
     {
-      "floodType": "tidal flooding",
       "floodID": "kt",
-      "data": [{
+      "floodData": [{
           "year": 2018,
           "data": [{
               "type": "maxdepth",

@@ -101,9 +101,8 @@
       ]
     },
     {
-      "floodType": "hurricane storm surge",
       "floodID": "c5",
-      "data": [{
+      "floodData": [{
           "year": 2018,
           "data": [{
               "type": "maxdepth",
@@ -202,9 +201,8 @@
       ]
     },
     {
-      "floodType": "hurricane storm surge",
       "floodID": "c3",
-      "data": [{
+      "floodData": [{
           "year": 2018,
           "data": [{
               "type": "maxdepth",
