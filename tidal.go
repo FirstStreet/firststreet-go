@@ -6,15 +6,14 @@ type DepthValuesTidal struct {
 	Value float64 `json:"value"`
 }
 
-type DataTidal struct {
+type FloodDataTidal struct {
 	Year     int64              `json:"year"`
 	RiskData []DepthValuesTidal `json:"data"`
 }
 
 type ResultsTidal struct {
-	FloodType string      `json:"floodType"`
-	FloodID   string      `json:"floodID"`
-	Data      []DataTidal `json:"data"`
+	FloodID   string           `json:"floodID"`
+	FloodData []FloodDataTidal `json:"floodData"`
 }
 
 type Tidal struct {

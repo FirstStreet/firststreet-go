@@ -6,15 +6,14 @@ type DepthValuesHurricane struct {
 	Value float64 `json:"value"`
 }
 
-type DataHurricane struct {
+type FloodDataHurricane struct {
 	Year     int64                  `json:"year"`
 	RiskData []DepthValuesHurricane `json:"data"`
 }
 
 type ResultsHurricane struct {
-	FloodType string          `json:"floodType"`
-	FloodID   string          `json:"floodID"`
-	Data      []DataHurricane `json:"data"`
+	FloodID   string               `json:"floodID"`
+	FloodData []FloodDataHurricane `json:"floodData"`
 }
 
 type Hurricane struct {

@@ -41,7 +41,7 @@ fs := client.New(backend)
 
 ### **Risk Summary**
 
-The risk summary API provides metadata and risks summary for a given `location`.
+The Risk Summary API provides metadata and risks summary for a given `location`.
 
 `fsf.DataSummary.<method>`
 
@@ -59,7 +59,7 @@ The risk summary API provides metadata and risks summary for a given `location`.
 
 ### **Hurricane Risk**
 
-The hurricane risk API provides hurricane risk for a given `location`.
+The Hurricane Risk API provides hurricane risk for a given `location`.
 
 `fsf.Hurricane.<method>`
 
@@ -77,7 +77,7 @@ The hurricane risk API provides hurricane risk for a given `location`.
 
 ### **Tidal Risk**
 
-The Tidal risk API provides tidal risk for a given `location`.
+The Tidal Risk API provides tidal risk for a given `location`.
 
 `fsf.Tidal.<method>`
 

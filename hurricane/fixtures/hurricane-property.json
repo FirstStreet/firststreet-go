@@ -1,9 +1,8 @@
 {
   "FSID": 450350219571,
   "results": [{
-      "floodType": "hurricane storm surge",
       "floodID": "c1",
-      "data": [{
+      "floodData": [{
           "year": 2018,
           "data": [{
               "type": "maxdepth",
