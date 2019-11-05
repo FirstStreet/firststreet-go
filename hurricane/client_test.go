@@ -29,6 +29,19 @@ func hurricanePropertyHandler() http.HandlerFunc {
 	})
 }
 
+func hurricaneCityHandler() http.HandlerFunc {
+	hurricaneCitySample, err := ioutil.ReadFile(testutil.GetDirectoryPath() + "/fixtures/hurricane-city.json")
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// nolint
+		w.Write(hurricaneCitySample)
+	})
+}
+
 func TestGetPropertyByID(t *testing.T) {
 	testutil.Once.Do(func() {
 		testutil.StartServer(hurricanePropertyHandler())
@@ -83,4 +96,61 @@ func TestGetPropertyByLatLng(t *testing.T) {
 
 	assert.Equal(t, want, response)
 }
+
+func TestGetCityByFSID(t *testing.T) {
+	testutil.Once.Do(func() {
+		testutil.StartServer(hurricaneCityHandler())
+	})
+	testBackend.URL = testutil.ServerAddr
+	c := &Client {
+		B: testBackend,
+	}
+
+	response, err := c.GetCityByFSID("4550875")
+	assert.Nil(t, err)
+	assert.NotNil(t, response)
+}
+
+func TestGetCityByLatLng(t *testing.T) {
+	testutil.Once.Do(func() {
+		testutil.StartServer(hurricaneCityHandler())
+	})
+	testBackend.URL = testutil.ServerAddr
+	c := &Client{
+		B: testBackend,
+	}
+
+	response, err := c.GetCityByLatLng(123.45, 67.8810)
+	assert.Nil(t, err)
+	assert.NotNil(t, response)
+
+	want := &firststreet.Hurricane{
+		FSID:    response.FSID,
+		Results: response.Results,
+	}
+
+	assert.Equal(t, want, response)
+}
+
+func TestGetCityByAddress(t *testing.T) {
+	testutil.Once.Do(func() {
+		testutil.StartServer(hurricaneCityHandler())
+	})
+	testBackend.URL = testutil.ServerAddr
+	c := &Client{
+		B: testBackend,
+	}
+
+	response, err := c.GetCityByAddress("just a test")
+	assert.Nil(t, err)
+	assert.NotNil(t, response)
+
+	want := &firststreet.Hurricane{
+		FSID:    response.FSID,
+		Results: response.Results,
+	}
+
+	assert.Equal(t, want, response)
+}
+
 
