@@ -60,7 +60,18 @@ type SummaryResultsProperty struct {
 	FloodRisks     []FloodRisks
 }
 
+type SummaryResultsCity struct {
+	Location       City
+	FirstFloodRisk FirstFloodRisk
+	FloodRisks     []FloodRisks
+}
+
 type SummaryProperty struct {
 	FSID    int64                  `json:"FSID"`
 	Results SummaryResultsProperty `json:"results"`
+}
+
+type SummaryCity struct {
+	FSID    int64              `json:"FSID"`
+	Results SummaryResultsCity `json:"results"`
 }

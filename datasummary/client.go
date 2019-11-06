@@ -43,10 +43,31 @@ func (c Client) GetPropertyByAddress(address string) (*firststreet.SummaryProper
 	return summaryResponse, err
 }
 
-// // GetCityByID retreives a City Parcel by its unique identifier
-// func (c Client) GetCityByID(id string) (*City, error) {
-// 	path := backend.FormatURLPath("/data/"+version+"/summary/%s?type=city&key=%s", id)
-// 	city := &City{}
-// 	err := c.B.Call(http.MethodGet, path, city)
-// 	return city, err
-// }
+// GetCityByFSID retreives a City Parcel by its unique identifier
+func (c Client) GetCityByFSID(fsid string) (*firststreet.SummaryCity, error) {
+	path := backend.FormatURLPath("/data/"+version+"/summary/city/%s", fsid)
+	summaryResponse := &firststreet.SummaryCity{}
+	err := c.B.Call(http.MethodGet, path, summaryResponse)
+	return summaryResponse, err
+}
+
+// GetCityByLatLng retrieves a City Parcel by lat lng
+func (c Client) GetCityByLatLng(lat, lng float64) (*firststreet.SummaryCity, error) {
+	latStr := strconv.FormatFloat(lat, 'f', -1, 64)
+	lngStr := strconv.FormatFloat(lng, 'f', -1, 64)
+
+	path := backend.FormatURLPath("/data/"+version+"/summary/city?lat=%s&lng=%s", latStr, lngStr)
+	summaryResponse := &firststreet.SummaryCity{}
+	err := c.B.Call(http.MethodGet, path, summaryResponse)
+	return summaryResponse, err
+}
+
+// GetCityByAddress pulls a parcel by lat lng
+func (c Client) GetCityByAddress(address string) (*firststreet.SummaryCity, error) {
+	path := backend.FormatURLPath("/data/"+version+"/summary/property?address=%s", address)
+
+	summaryResponse := &firststreet.SummaryCity{}
+	err := c.B.Call(http.MethodGet, path, summaryResponse)
+	return summaryResponse, err
+}
+
