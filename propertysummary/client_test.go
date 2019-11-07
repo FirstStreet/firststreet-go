@@ -40,18 +40,6 @@ func summaryPropertyNullHandler() http.HandlerFunc {
 	})
 }
 
-func summaryCityHandler() http.HandlerFunc {
-	summarySample, err := ioutil.ReadFile(testutil.GetDirectoryPath() + "/fixtures/summary-city.json")
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// nolint
-		w.Write(summarySample)
-	})
-}
-
 func TestPropertySummary(t *testing.T) {
 	testutil.Once.Do(func() {
 		testutil.StartServer(summaryPropertyHandler())

@@ -1,73 +1,46 @@
 package marketvalueimpact
 
 import (
+	"errors"
 	"net/http"
-	"strconv"
 
 	firststreet "github.com/firststreet/firststreet-go"
 	"github.com/firststreet/firststreet-go/backend"
 )
-
-// version is the current product version
-const version = "v1.0"
 
 // Client is used for /data/{svc}
 type Client struct {
 	B *backend.Backend
 }
 
-// GetPropertyByFSID retreives a location's risk MVI by its unique identifier
-func (c Client) GetPropertyByFSID(fsid string) (*firststreet.MVI, error) {
-	path := backend.FormatURLPath("/data/"+version+"/market-value-impact/property/%s", fsid)
-	response := &firststreet.MVI{}
-	err := c.B.Call(http.MethodGet, path, response)
-	return response, err
+func (c Client) Lookup(lookup *firststreet.Lookup) (*firststreet.FloodRiskData, error) {
+	var path string
+	var err error
+
+	mviResponse := &firststreet.FloodRiskData{}
+
+	lookupType, err := lookup.LookupType()
+
+	if err != nil {
+		return mviResponse, err
+	}
+
+	if lookupType == "" {
+		return mviResponse, errors.New("Lookup type could not be determined: Expecting an FSID, LatLng, or Address.")
+	}
+
+	if lookupType == firststreet.FSIDLookup {
+		path = backend.FormatURLPath("/data/"+c.B.Version+"/market-value-impact/property/%s", lookup.FSIDString())
+	}
+
+	if lookupType == firststreet.CoordinateLookup {
+		path = backend.FormatURLPath("/data/"+c.B.Version+"/market-value-impact/property?lat=%s&lng=%s", lookup.LatLngString("lat"), lookup.LatLngString("lng"))
+	}
+
+	if lookupType == firststreet.AddressLookup {
+		path = backend.FormatURLPath("/data/"+c.B.Version+"/market-value-impact/property?address=%s", lookup.Address)
+	}
+
+	err = c.B.Call(http.MethodGet, path, mviResponse)
+	return mviResponse, err
 }
-
-// GetPropertyByLatLng pulls a parcel's risk MVI by lat lng
-func (c Client) GetPropertyByLatLng(lat, lng float64) (*firststreet.MVI, error) {
-	latStr := strconv.FormatFloat(lat, 'f', -1, 64)
-	lngStr := strconv.FormatFloat(lng, 'f', -1, 64)
-
-	path := backend.FormatURLPath("/data/"+version+"/market-value-impact/property?lat=%s&lng=%s", latStr, lngStr)
-	response := &firststreet.MVI{}
-	err := c.B.Call(http.MethodGet, path, response)
-	return response, err
-}
-
-// GetPropertyByAddress pulls a parcel's risk MVI by address
-func (c Client) GetPropertyByAddress(address string) (*firststreet.MVI, error) {
-	path := backend.FormatURLPath("/data/"+version+"/market-value-impact/property?address=%s", address)
-	response := &firststreet.MVI{}
-	err := c.B.Call(http.MethodGet, path, response)
-	return response, err
-}
-
-// GetCityByFSID retreives City Risk MVI by its unique identifier
-func (c Client) GetCityByFSID(fsid string) (*firststreet.MVI, error) {
-	path := backend.FormatURLPath("/data/"+version+"/market-value-impact/city/%s", fsid)
-	response := &firststreet.MVI{}
-	err := c.B.Call(http.MethodGet, path, response)
-	return response, err
-}
-
-// GetCityByLatLng retrieves City Risk MVI by lat lng
-func (c Client) GetCityByLatLng(lat, lng float64) (*firststreet.MVI, error) {
-	latStr := strconv.FormatFloat(lat, 'f', -1, 64)
-	lngStr := strconv.FormatFloat(lng, 'f', -1, 64)
-
-	path := backend.FormatURLPath("/data/"+version+"/market-value-impact/city?lat=%s&lng=%s", latStr, lngStr)
-	response := &firststreet.MVI{}
-	err := c.B.Call(http.MethodGet, path, response)
-	return response, err
-}
-
-// GetCityByAddress pulls City Risk MVI by lat lng
-func (c Client) GetCityByAddress(address string) (*firststreet.MVI, error) {
-	path := backend.FormatURLPath("/data/"+version+"/market-value-impact/property?address=%s", address)
-
-	response := &firststreet.MVI{}
-	err := c.B.Call(http.MethodGet, path, response)
-	return response, err
-}
-

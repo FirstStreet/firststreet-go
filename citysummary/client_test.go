@@ -1,4 +1,4 @@
-package marketvalueimpact
+package citysummary
 
 import (
 	"fmt"
@@ -17,21 +17,21 @@ var testBackend = &backend.Backend{
 	Key:        "test",
 }
 
-func marketValueImpactPropertyHandler() http.HandlerFunc {
-	mviSample, err := ioutil.ReadFile(testutil.GetDirectoryPath() + "/fixtures/mvi-property.json")
+func summaryCityHandler() http.HandlerFunc {
+	summarySample, err := ioutil.ReadFile(testutil.GetDirectoryPath() + "/fixtures/summary-city.json")
 	if err != nil {
 		fmt.Println(err)
 	}
 
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// nolint
-		w.Write(mviSample)
+		w.Write(summarySample)
 	})
 }
 
-func TestMVILookup(t *testing.T) {
+func TestCitySummary(t *testing.T) {
 	testutil.Once.Do(func() {
-		testutil.StartServer(marketValueImpactPropertyHandler())
+		testutil.StartServer(summaryCityHandler())
 	})
 	testBackend.URL = testutil.ServerAddr
 	c := &Client{
@@ -39,14 +39,14 @@ func TestMVILookup(t *testing.T) {
 	}
 
 	fsidLookup := &firststreet.Lookup{
-		FSID: 450350219571,
+		FSID: 1222175,
 	}
 
-	mvi, err := c.Lookup(fsidLookup)
+	property, err := c.Lookup(fsidLookup)
 	assert.Nil(t, err)
-	assert.NotNil(t, mvi)
-	assert.Equal(t, mvi.FSID, int64(450350219571))
-	assert.NotNil(t, mvi.Results)
+	assert.NotNil(t, property)
+	assert.Equal(t, property.FSID, int64(1222175))
+	assert.NotNil(t, property.Results.Location)
 
 	fsidLookupBad := &firststreet.Lookup{}
 	_, err = c.Lookup(fsidLookupBad)
@@ -57,20 +57,20 @@ func TestMVILookup(t *testing.T) {
 		Lng: -23.12,
 	}
 
-	mvi, err = c.Lookup(latLngLookup)
+	property, err = c.Lookup(latLngLookup)
 	assert.Nil(t, err)
-	assert.NotNil(t, mvi)
-	assert.Equal(t, mvi.FSID, int64(450350219571))
-	assert.NotNil(t, mvi.Results)
+	assert.NotNil(t, property)
+	assert.Equal(t, property.FSID, int64(1222175))
+	assert.NotNil(t, property.Results.Location)
 
 	addressLookup := &firststreet.Lookup{
 		Address: "1327 Autumn Drive Fernandina Beach FL",
 	}
 
-	mvi, err = c.Lookup(addressLookup)
+	property, err = c.Lookup(addressLookup)
 	assert.Nil(t, err)
-	assert.NotNil(t, mvi)
-	assert.Equal(t, mvi.FSID, int64(450350219571))
-	assert.NotNil(t, mvi.Results)
+	assert.NotNil(t, property)
+	assert.Equal(t, property.FSID, int64(1222175))
+	assert.NotNil(t, property.Results.Location)
 
 }

@@ -13,6 +13,18 @@ type Lookup struct {
 	Address string
 }
 
+// LookupType describes which type of lookup to use
+type LookupType string
+
+const FSIDLookup = LookupType("fsid")
+const AddressLookup = LookupType("address")
+const CoordinateLookup = LookupType("coordinate")
+
+type LocationType string
+
+const PropertyLocationType = LocationType("property")
+const CityLocationType = LocationType("city")
+
 // FSIDIsValid returns true if FSID is not 0
 func (l *Lookup) FSIDIsValid() bool {
 	return l.FSID != 0
@@ -51,18 +63,18 @@ func (l *Lookup) LatLngString(latlng string) string {
 }
 
 // LookupType returns the requested lookup type
-func (l *Lookup) LookupType() (string, error) {
+func (l *Lookup) LookupType() (LookupType, error) {
 	if l.FSIDIsValid() {
-		return "fsid", nil
+		return FSIDLookup, nil
 	}
 
 	if l.LatLngIsValid() {
-		return "coordinate", nil
+		return CoordinateLookup, nil
 	}
 
 	if l.AddressIsValid() {
-		return "address", nil
+		return AddressLookup, nil
 	}
 
-	return "", errors.New("Lookup type could not be determined: Expecting an FSID, LatLng, or Address.")
+	return "", errors.New("Lookup type could not be determined: Expecting an FSID, Lat and Lng, or Address.")
 }
