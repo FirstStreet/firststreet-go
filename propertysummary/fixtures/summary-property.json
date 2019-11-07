@@ -11,7 +11,7 @@
       "zipCode": 32034,
       "city": {
         "FSID": 1222175,
-        "Name": "Fernandina Beach"
+        "name": "Fernandina Beach"
       },
       "state": "Florida",
       "geometry": {},

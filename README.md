@@ -39,23 +39,48 @@ backend := firststreet.NewBackend("api-key")
 fs := client.New(backend)
 ```
 
+## Lookup
+
+Provide a `Lookup` to the specific product. A [lookup](https://docs.firststreet.dev/docs/lookups) determines how the location will be queried.
+
+### FSID
+
+```go
+lookup := &firststreet.Lookup{
+  FSID: 123456,
+}
+```
+
+### Coordinate
+
+```go
+lookup := &firststreet.Lookup{
+  Lat: 51.4779,
+  Lng: 0.0015,
+}
+```
+
+### Address
+
+```go
+lookup := &firststreet.Lookup{
+  Address: "247 Water Street, Brooklyn NY, 11201",
+}
+```
+
 ### **Risk Summary**
 
-The Risk Summary API provides metadata and risks summary for a given `location`.
+The Risk Summary API provides metadata and risks summary for a given `location`. Depending on the location type, a `PropertySummary` or `CitySummary` will be returned.
 
-`fsf.DataSummary.<method>`
+`fsf.{Location}<method>(lookup *firststreet.Lookup)`
 
-**Property**
+### Property
 
-- GetPropertyByFSID(FSID `string`) - Retreives a `ParcelProperty` by specific ID
-- GetPropertyByLatLng(lat `float64`, lng `float64`) - Retreives a `ParcelProperty` by a coordinate
-- GetPropertyByAddress(address `string`) - Retrieves a `ParcelProperty` by address lookup
+- `fsf.PropertySummary(lookup)`
 
-**City**
+### City
 
-- GetCityByID(ID `string`) - Retreives a `ParcelProperty` by specific ID
-- GetCityByLatLng(lat `float64`, lng `float64`) - Retreives a `ParcelProperty` by a coordinate
-- GetCityByAddress(address `string`) - Retrieves a `ParcelProperty` by address lookup
+- `fsf.CitySummary(lookup)`
 
 ### **Hurricane Risk**
 

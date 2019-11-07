@@ -2,18 +2,18 @@ package client
 
 import (
 	"github.com/firststreet/firststreet-go/backend"
-	"github.com/firststreet/firststreet-go/datasummary"
+	"github.com/firststreet/firststreet-go/propertysummary"
 )
 
 // The API provides interfaces to Flood iQ services
 type API struct {
-	DataSummary *datasummary.Client
-	RateLimit   *backend.RateLimit
+	RateLimit       *backend.RateLimit
+	PropertySummary *propertysummary.Client
 }
 
 // InitAPI initalizes services-level APIs
 func (a *API) InitAPI(backend *backend.Backend) {
-	a.DataSummary = &datasummary.Client{B: backend}
+	a.PropertySummary = &propertysummary.Client{B: backend}
 }
 
 // New creates an API Client
