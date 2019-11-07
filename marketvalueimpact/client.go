@@ -13,7 +13,7 @@ type Client struct {
 	B *backend.Backend
 }
 
-func (c Client) Lookup(lookup *firststreet.Lookup) (*firststreet.FloodRiskData, error) {
+func (c Client) Lookup(locationType firststreet.LocationType, lookup *firststreet.Lookup) (*firststreet.FloodRiskData, error) {
 	var path string
 	var err error
 
@@ -30,15 +30,15 @@ func (c Client) Lookup(lookup *firststreet.Lookup) (*firststreet.FloodRiskData, 
 	}
 
 	if lookupType == firststreet.FSIDLookup {
-		path = backend.FormatURLPath("/data/"+c.B.Version+"/market-value-impact/property/%s", lookup.FSIDString())
+		path = backend.FormatURLPath("/data/"+c.B.Version+"/market-value-impact/"+string(locationType)+"/%s", lookup.FSIDString())
 	}
 
 	if lookupType == firststreet.CoordinateLookup {
-		path = backend.FormatURLPath("/data/"+c.B.Version+"/market-value-impact/property?lat=%s&lng=%s", lookup.LatLngString("lat"), lookup.LatLngString("lng"))
+		path = backend.FormatURLPath("/data/"+c.B.Version+"/market-value-impact/"+string(locationType)+"?lat=%s&lng=%s", lookup.LatLngString("lat"), lookup.LatLngString("lng"))
 	}
 
 	if lookupType == firststreet.AddressLookup {
-		path = backend.FormatURLPath("/data/"+c.B.Version+"/market-value-impact/property?address=%s", lookup.Address)
+		path = backend.FormatURLPath("/data/"+c.B.Version+"/market-value-impact/"+string(locationType)+"?address=%s", lookup.Address)
 	}
 
 	err = c.B.Call(http.MethodGet, path, mviResponse)
