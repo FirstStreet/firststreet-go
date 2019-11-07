@@ -42,14 +42,14 @@ func TestMVILookup(t *testing.T) {
 		FSID: 450350219571,
 	}
 
-	mvi, err := c.Lookup(fsidLookup)
+	mvi, err := c.Lookup(firststreet.PropertyLocationType, fsidLookup)
 	assert.Nil(t, err)
 	assert.NotNil(t, mvi)
 	assert.Equal(t, mvi.FSID, int64(450350219571))
 	assert.NotNil(t, mvi.Results)
 
 	fsidLookupBad := &firststreet.Lookup{}
-	_, err = c.Lookup(fsidLookupBad)
+	_, err = c.Lookup(firststreet.PropertyLocationType, fsidLookupBad)
 	assert.NotNil(t, err)
 
 	latLngLookup := &firststreet.Lookup{
@@ -57,7 +57,7 @@ func TestMVILookup(t *testing.T) {
 		Lng: -23.12,
 	}
 
-	mvi, err = c.Lookup(latLngLookup)
+	mvi, err = c.Lookup(firststreet.PropertyLocationType, latLngLookup)
 	assert.Nil(t, err)
 	assert.NotNil(t, mvi)
 	assert.Equal(t, mvi.FSID, int64(450350219571))
@@ -67,7 +67,7 @@ func TestMVILookup(t *testing.T) {
 		Address: "1327 Autumn Drive Fernandina Beach FL",
 	}
 
-	mvi, err = c.Lookup(addressLookup)
+	mvi, err = c.Lookup(firststreet.PropertyLocationType, addressLookup)
 	assert.Nil(t, err)
 	assert.NotNil(t, mvi)
 	assert.Equal(t, mvi.FSID, int64(450350219571))
