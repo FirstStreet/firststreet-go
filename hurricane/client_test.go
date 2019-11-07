@@ -98,13 +98,13 @@ func TestHurricaneLookupCity(t *testing.T) {
 	}
 
 	fsidLookup := &firststreet.Lookup{
-		FSID: 4550875,
+		FSID: 450350219571,
 	}
 
 	frd, err := c.Lookup(firststreet.CityLocationType, fsidLookup)
 	assert.Nil(t, err)
 	assert.NotNil(t, frd)
-	assert.Equal(t, frd.FSID, int64(4550875))
+	assert.Equal(t, frd.FSID, int64(450350219571))
 	assert.NotNil(t, frd.Results)
 
 	fsidLookupBad := &firststreet.Lookup{}
@@ -119,7 +119,7 @@ func TestHurricaneLookupCity(t *testing.T) {
 	frd, err = c.Lookup(firststreet.CityLocationType, latLngLookup)
 	assert.Nil(t, err)
 	assert.NotNil(t, frd)
-	assert.Equal(t, frd.FSID, int64(4550875))
+	assert.Equal(t, frd.FSID, int64(450350219571))
 	assert.NotNil(t, frd.Results)
 
 	addressLookup := &firststreet.Lookup{
@@ -129,6 +129,6 @@ func TestHurricaneLookupCity(t *testing.T) {
 	frd, err = c.Lookup(firststreet.CityLocationType, addressLookup)
 	assert.Nil(t, err)
 	assert.NotNil(t, frd)
-	assert.Equal(t, frd.FSID, int64(4550875))
+	assert.Equal(t, frd.FSID, int64(450350219571))
 	assert.NotNil(t, frd.Results)
 }

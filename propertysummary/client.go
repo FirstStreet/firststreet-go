@@ -13,11 +13,11 @@ type Client struct {
 	B *backend.Backend
 }
 
-func (c Client) Lookup(lookup *firststreet.Lookup) (*firststreet.FloodRiskData, error) {
+func (c Client) Lookup(lookup *firststreet.Lookup) (*firststreet.PropertySummary, error) {
 	var path string
 	var err error
 
-	summaryResponse := &firststreet.FloodRiskData{}
+	summaryResponse := &firststreet.PropertySummary{}
 
 	lookupType, err := lookup.LookupType()
 
