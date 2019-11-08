@@ -68,11 +68,9 @@ lookup := &firststreet.Lookup{
 }
 ```
 
-### **Risk Summary**
+## **Risk Summary**
 
 The Risk Summary API provides metadata and risks summary for a given `location`. Depending on the location type, a `PropertySummary` or `CitySummary` will be returned.
-
-`fsf.{Location}<method>(lookup *firststreet.Lookup)`
 
 ### Property
 
@@ -82,64 +80,35 @@ The Risk Summary API provides metadata and risks summary for a given `location`.
 
 - `fsf.CitySummary(lookup)`
 
-### **Hurricane Risk**
+## Location Types
+
+When doing a data request that is outside of Risk Summary, a `locationType` is required, depending on the type of location you are querying.
+
+- `firststreet.PropertyLocationType` provides the `property` location type
+- `firststreet.CityLocationType` provides the `city` location type
+
+## **Hurricane Risk**
 
 The Hurricane Risk API provides hurricane risk for a given `location`.
 
-`fsf.Hurricane.<method>`
+`fsf.Hurricane.Lookup(locationType, lookup)``
 
-**Property**
-
-- GetPropertyByFSID(FSID `string`) - Retreives Hurricane Risk for a property by specific ID
-- GetPropertyByLatLng(lat `float64`, lng `float64`) - Retreives Hurricane Risk for a property by a coordinate
-- GetPropertyByAddress(lat `float64`, lng `float64`) - Retreives Hurricane Risk for a property by address lookup
-
-**City**
-
-- GetCityByID(ID `string`) - Retreives Hurricane Risk for a city by specific ID
-- GetCityByLatLng(lat `float64`, lng `float64`) - Retreives a Hurricane Risk for a city by a coordinate
-- GetCityByAddress(lat `float64`, lng `float64`) - Retreives Hurricane Risk for a city by address lookup
-
-### **Tidal Risk**
+## **Tidal Risk**
 
 The Tidal Risk API provides tidal risk for a given `location`.
 
-`fsf.Tidal.<method>`
+`fsf.Tidal.Lookup(locationType, lookup)``
 
-**Property**
-
-- GetPropertyByFSID(FSID `string`) - Retreives Tidal Risk for a property by specific ID
-- GetPropertyByLatLng(lat `float64`, lng `float64`) - Retreives Tidal Risk for a property by a coordinate
-- GetPropertyByAddress(lat `float64`, lng `float64`) - Retreives Tidal Risk for a property by address lookup
-
-**City**
-
-- GetCityByID(ID `string`) - Retreives Tidal Risk for a city by specific ID
-- GetCityByLatLng(lat `float64`, lng `float64`) - Retreives a Tidal Risk for a city by a coordinate
-- GetCityByAddress(lat `float64`, lng `float64`) - Retreives Tidal Risk for a city by address lookup
-
-### **Market Value Impact**
+## **Market Value Impact**
 
 The Market Value Impact API provides tidal risk for a given `location`.
 
-`fsf.MVI.<method>`
+`fsf.MVI.Lookup(locationType, lookup)``
 
-**Property**
-
-- GetPropertyByFSID(FSID `string`) - Retreives Market Value Impact for a property by specific ID
-- GetPropertyByLatLng(lat `float64`, lng `float64`) - Retreives Market Value Impact for a property by a coordinate
-- GetPropertyByAddress(lat `float64`, lng `float64`) - Retreives Market Value Impact for a property by address lookup
-
-**City**
-
-- GetCityByID(ID `string`) - Retreives Market Value Impact for a city by specific ID
-- GetCityByLatLng(lat `float64`, lng `float64`) - Retreives a Market Value Impact for a city by a coordinate
-- GetCityByAddress(lat `float64`, lng `float64`) - Retreives Market Value Impact for a city by address lookup
-
-### Errors
+## Errors
 
 All errors will have a `Code`, `Status` and `Message` attached to it.
 
-### Rate Limits
+## Rate Limits
 
 Rate limit information is provided wit

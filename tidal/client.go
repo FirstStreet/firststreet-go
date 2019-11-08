@@ -13,6 +13,7 @@ type Client struct {
 	B *backend.Backend
 }
 
+// Lookup provides tidal lookup
 func (c Client) Lookup(locationType firststreet.LocationType, lookup *firststreet.Lookup) (*firststreet.FloodRiskData, error) {
 	var path string
 	var err error
