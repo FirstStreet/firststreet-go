@@ -1,0 +1,30 @@
+version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.4
+jobs:
+  test:
+    docker:
+      - image: circleci/golang:latest
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-pkg-cache
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Lint
+          command: |
+            go get -u github.com/golangci/golangci-lint/cmd/golangci-lint
+            make lint
+      - run:
+          name: Run tests
+          command: |
+            make coverage
+      - codecov/upload:
+          token: 41ae91fc-39d2-4265-b7f2-6c7123702ea9
+          file: coverage.txt
+      - save_cache:
+          key: v1-pkg-cache
+          paths:
+            - "/go/pkg"          

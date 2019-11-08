@@ -1,3 +1,6 @@
+lint:
+	LOG_LEVEL=error golangci-lint run --tests=false --skip-dirs /*mock -v
+
 test:
 	go test ./...
 

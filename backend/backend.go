@@ -96,18 +96,6 @@ func getRateLimit(r *http.Response) *RateLimit {
 	}
 }
 
-func checkStatusCode(r *http.Response) error {
-	if r.StatusCode == http.StatusTooManyRequests {
-		return errors.New("Too many requests")
-	}
-
-	if r.StatusCode != http.StatusOK {
-		return statusCodeError{Code: r.StatusCode, Status: r.Status}
-	}
-
-	return nil
-}
-
 // Call deserializes a requested url and binds it to an interface
 func (b *Backend) Call(method, path string, v interface{}) error {
 	req, err := b.NewRequest(method, path, "application/x-www-form-urlencoded")
@@ -179,7 +167,6 @@ func (b *Backend) Do(req *http.Request, body *bytes.Buffer, v interface{}) error
 	res, err = b.HTTPClient.Do(req)
 
 	if err != nil {
-		fmt.Errorf("Request failed: %v", err)
 		return err
 	}
 
@@ -189,7 +176,6 @@ func (b *Backend) Do(req *http.Request, body *bytes.Buffer, v interface{}) error
 	resBody, err := ioutil.ReadAll(res.Body)
 
 	if err != nil {
-		fmt.Errorf("Cannot read response: %v", err)
 		return err
 	}
 
@@ -228,7 +214,6 @@ func (b *Backend) DoRaw(req *http.Request, body *bytes.Buffer) ([]byte, error) {
 	res, err = b.HTTPClient.Do(req)
 
 	if err != nil {
-		fmt.Errorf("Request failed: %v", err)
 		return nil, err
 	}
 
@@ -238,13 +223,10 @@ func (b *Backend) DoRaw(req *http.Request, body *bytes.Buffer) ([]byte, error) {
 	resBody, err := ioutil.ReadAll(res.Body)
 
 	if err != nil {
-		fmt.Errorf("Cannot read response: %v", err)
 		return nil, err
 	}
 
 	if res.StatusCode >= 400 {
-		fmt.Errorf("Cannot find resource: %v", err)
-		// SendError, res + resBody
 		return nil, err
 	}
 

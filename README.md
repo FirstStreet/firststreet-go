@@ -1,4 +1,4 @@
-# Go First Street Foundation
+# Go First Street Foundation [![codecov](https://codecov.io/gh/FirstStreet/firststreet-go/branch/master/graph/badge.svg?token=KGfgBydmly)](https://codecov.io/gh/FirstStreet/firststreet-go)
 
 **WARNING**: This library is beta and subject to change. It's not ready to be used in production quite yet.
 
