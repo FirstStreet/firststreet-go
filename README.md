@@ -27,7 +27,7 @@ import (
 
 ## Documentation
 
-**In order to use the First Street Foundation API, you must register for an API key at https://firststreet.dev.**
+**In order to use the First Street Foundation API, you must register for an API key at https://firststreet.dev.** For more in-depth documentation and API reference, see https://docs.firststreet.dev
 
 ### Initalizing the client
 
