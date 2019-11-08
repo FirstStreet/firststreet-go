@@ -40,21 +40,7 @@ func tidalCityHandler() http.HandlerFunc {
 		w.Write(tidalSample)
 	})
 }
-
-func TestGetPropertyByID(t *testing.T) {
-	testutil.Once.Do(func() {
-		testutil.StartServer(tidalPropertyHandler())
-	})
-	testBackend.URL = testutil.ServerAddr
-	c := &Client{
-		B: testBackend,
-	}
-	property, err := c.GetPropertyByFSID("100032470544")
-	assert.Nil(t, err)
-	assert.NotNil(t, property)
-}
-
-func TestGetPropertyByAddress(t *testing.T) {
+func TestTidalLookupProperty(t *testing.T) {
 	testutil.Once.Do(func() {
 		testutil.StartServer(tidalPropertyHandler())
 	})
@@ -63,53 +49,44 @@ func TestGetPropertyByAddress(t *testing.T) {
 		B: testBackend,
 	}
 
-	response, err := c.GetPropertyByAddress("just a test")
-	assert.Nil(t, err)
-	assert.NotNil(t, response)
-
-	want := &firststreet.Tidal{
-		FSID:    response.FSID,
-		Results: response.Results,
+	fsidLookup := &firststreet.Lookup{
+		FSID: 450350219571,
 	}
 
-	assert.Equal(t, want, response)
+	frd, err := c.Lookup(firststreet.PropertyLocationType, fsidLookup)
+	assert.Nil(t, err)
+	assert.NotNil(t, frd)
+	assert.Equal(t, frd.FSID, int64(450350219571))
+	assert.NotNil(t, frd.Results)
+
+	fsidLookupBad := &firststreet.Lookup{}
+	_, err = c.Lookup(firststreet.PropertyLocationType, fsidLookupBad)
+	assert.NotNil(t, err)
+
+	latLngLookup := &firststreet.Lookup{
+		Lat: -43.23,
+		Lng: -23.12,
+	}
+
+	frd, err = c.Lookup(firststreet.PropertyLocationType, latLngLookup)
+	assert.Nil(t, err)
+	assert.NotNil(t, frd)
+	assert.Equal(t, frd.FSID, int64(450350219571))
+	assert.NotNil(t, frd.Results)
+
+	addressLookup := &firststreet.Lookup{
+		Address: "1327 Autumn Drive Fernandina Beach FL",
+	}
+
+	frd, err = c.Lookup(firststreet.PropertyLocationType, addressLookup)
+	assert.Nil(t, err)
+	assert.NotNil(t, frd)
+	assert.Equal(t, frd.FSID, int64(450350219571))
+	assert.NotNil(t, frd.Results)
+
 }
 
-func TestGetPropertyByLatLng(t *testing.T) {
-	testutil.Once.Do(func() {
-		testutil.StartServer(tidalPropertyHandler())
-	})
-	testBackend.URL = testutil.ServerAddr
-	c := &Client{
-		B: testBackend,
-	}
-
-	response, err := c.GetPropertyByLatLng(123.45, 67.8810)
-	assert.Nil(t, err)
-	assert.NotNil(t, response)
-
-	want := &firststreet.Tidal{
-		FSID:    response.FSID,
-		Results: response.Results,
-	}
-
-	assert.Equal(t, want, response)
-}
-
-func TestGetCityByID(t *testing.T) {
-	testutil.Once.Do(func() {
-		testutil.StartServer(tidalCityHandler())
-	})
-	testBackend.URL = testutil.ServerAddr
-	c := &Client{
-		B: testBackend,
-	}
-	property, err := c.GetCityByFSID("100032470544")
-	assert.Nil(t, err)
-	assert.NotNil(t, property)
-}
-
-func TestGetCityByAddress(t *testing.T) {
+func TestTidalLookupCity(t *testing.T) {
 	testutil.Once.Do(func() {
 		testutil.StartServer(tidalCityHandler())
 	})
@@ -118,35 +95,38 @@ func TestGetCityByAddress(t *testing.T) {
 		B: testBackend,
 	}
 
-	response, err := c.GetCityByAddress("just a test")
+	fsidLookup := &firststreet.Lookup{
+		FSID: 450350219571,
+	}
+
+	frd, err := c.Lookup(firststreet.CityLocationType, fsidLookup)
 	assert.Nil(t, err)
-	assert.NotNil(t, response)
+	assert.NotNil(t, frd)
+	assert.Equal(t, frd.FSID, int64(450350219571))
+	assert.NotNil(t, frd.Results)
 
-	want := &firststreet.Tidal{
-		FSID:    response.FSID,
-		Results: response.Results,
+	fsidLookupBad := &firststreet.Lookup{}
+	_, err = c.Lookup(firststreet.CityLocationType, fsidLookupBad)
+	assert.NotNil(t, err)
+
+	latLngLookup := &firststreet.Lookup{
+		Lat: -43.23,
+		Lng: -23.12,
 	}
 
-	assert.Equal(t, want, response)
-}
-
-func TestGetCityByLatLng(t *testing.T) {
-	testutil.Once.Do(func() {
-		testutil.StartServer(tidalCityHandler())
-	})
-	testBackend.URL = testutil.ServerAddr
-	c := &Client{
-		B: testBackend,
-	}
-
-	response, err := c.GetCityByLatLng(123.45, 67.8810)
+	frd, err = c.Lookup(firststreet.CityLocationType, latLngLookup)
 	assert.Nil(t, err)
-	assert.NotNil(t, response)
+	assert.NotNil(t, frd)
+	assert.Equal(t, frd.FSID, int64(450350219571))
+	assert.NotNil(t, frd.Results)
 
-	want := &firststreet.Tidal{
-		FSID:    response.FSID,
-		Results: response.Results,
+	addressLookup := &firststreet.Lookup{
+		Address: "1327 Autumn Drive Fernandina Beach FL",
 	}
 
-	assert.Equal(t, want, response)
+	frd, err = c.Lookup(firststreet.CityLocationType, addressLookup)
+	assert.Nil(t, err)
+	assert.NotNil(t, frd)
+	assert.Equal(t, frd.FSID, int64(450350219571))
+	assert.NotNil(t, frd.Results)
 }
