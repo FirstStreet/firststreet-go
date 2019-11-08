@@ -1,6 +1,6 @@
 # Go First Street Foundation
 
-**WARNING**: This library is beta and subject to change. It's not ready to be used in production quite yet.
+**Notice**: This library is beta and subject to change.
 
 ---
 
