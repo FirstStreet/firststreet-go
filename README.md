@@ -36,7 +36,7 @@ import (
 backend := firststreet.NewBackend("api-key")
 
 // Create the API client
-fs := client.New(backend)
+fsf := client.New(backend)
 ```
 
 ## Lookup
@@ -74,11 +74,11 @@ The Risk Summary API provides metadata and risks summary for a given `location`.
 
 ### Property
 
-- `fsf.PropertySummary(lookup)`
+- `fsf.PropertySummary.Lookup(lookup)`
 
 ### City
 
-- `fsf.CitySummary(lookup)`
+- `fsf.CitySummary.Lookup(lookup)`
 
 ## Location Types
 
@@ -91,19 +91,19 @@ When doing a data request that is outside of Risk Summary, a `locationType` is r
 
 The Hurricane Risk API provides hurricane risk for a given `location`.
 
-`fsf.Hurricane.Lookup(locationType, lookup)``
+`fsf.Hurricane.Lookup(locationType, lookup)`
 
 ## **Tidal Risk**
 
 The Tidal Risk API provides tidal risk for a given `location`.
 
-`fsf.Tidal.Lookup(locationType, lookup)``
+`fsf.Tidal.Lookup(locationType, lookup)`
 
 ## **Market Value Impact**
 
 The Market Value Impact API provides tidal risk for a given `location`.
 
-`fsf.MVI.Lookup(locationType, lookup)``
+`fsf.MVI.Lookup(locationType, lookup)`
 
 ## Errors
 
