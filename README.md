@@ -1,4 +1,4 @@
-# Go First Street Foundation [![codecov](https://codecov.io/gh/FirstStreet/firststreet-go/branch/master/graph/badge.svg?token=KGfgBydmly)](https://codecov.io/gh/FirstStreet/firststreet-go)
+# Go First Street Foundation [![CircleCI](https://circleci.com/gh/FirstStreet/firststreet-go.svg?style=svg&circle-token=1c06b4bacc08aeb1028dddc5c86d09b5c417d1cd)](https://circleci.com/gh/FirstStreet/firststreet-go) [![codecov](https://codecov.io/gh/FirstStreet/firststreet-go/branch/master/graph/badge.svg?token=KGfgBydmly)](https://codecov.io/gh/FirstStreet/firststreet-go)
 
 **Notice**: This library is beta and subject to change.
 
