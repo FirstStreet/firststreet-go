@@ -27,4 +27,8 @@ jobs:
       - save_cache:
           key: v1-pkg-cache
           paths:
-            - "/go/pkg"          
+            - "/go/pkg"        
+workflows:
+  test:
+    jobs:
+      - test  
