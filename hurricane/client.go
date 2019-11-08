@@ -1,73 +1,46 @@
 package hurricane
 
 import (
+	"errors"
 	"net/http"
-	"strconv"
 
 	firststreet "github.com/firststreet/firststreet-go"
 	"github.com/firststreet/firststreet-go/backend"
 )
-
-// version is the current product version
-const version = "v1.0"
 
 // Client is used for /data/{svc}
 type Client struct {
 	B *backend.Backend
 }
 
-// GetPropertyByFSID retreives a location hurricane risk by its unique identifier
-func (c Client) GetPropertyByFSID(fsid string) (*firststreet.Hurricane, error) {
-	path := backend.FormatURLPath("/data/"+version+"/hurricane/property/%s", fsid)
-	response := &firststreet.Hurricane{}
-	err := c.B.Call(http.MethodGet, path, response)
-	return response, err
+func (c Client) Lookup(locationType firststreet.LocationType, lookup *firststreet.Lookup) (*firststreet.FloodRiskData, error) {
+	var path string
+	var err error
+
+	mviResponse := &firststreet.FloodRiskData{}
+
+	lookupType, err := lookup.LookupType()
+
+	if err != nil {
+		return mviResponse, err
+	}
+
+	if lookupType == "" {
+		return mviResponse, errors.New("Lookup type could not be determined: Expecting an FSID, LatLng, or Address.")
+	}
+
+	if lookupType == firststreet.FSIDLookup {
+		path = backend.FormatURLPath("/data/"+c.B.Version+"/hurricane/"+string(locationType)+"/%s", lookup.FSIDString())
+	}
+
+	if lookupType == firststreet.CoordinateLookup {
+		path = backend.FormatURLPath("/data/"+c.B.Version+"/hurricane/"+string(locationType)+"?lat=%s&lng=%s", lookup.LatLngString("lat"), lookup.LatLngString("lng"))
+	}
+
+	if lookupType == firststreet.AddressLookup {
+		path = backend.FormatURLPath("/data/"+c.B.Version+"/hurricane/"+string(locationType)+"?address=%s", lookup.Address)
+	}
+
+	err = c.B.Call(http.MethodGet, path, mviResponse)
+	return mviResponse, err
 }
-
-// GetPropertyByLatLng pulls a parcel's hurricane risk by lat lng
-func (c Client) GetPropertyByLatLng(lat, lng float64) (*firststreet.Hurricane, error) {
-	latStr := strconv.FormatFloat(lat, 'f', -1, 64)
-	lngStr := strconv.FormatFloat(lng, 'f', -1, 64)
-
-	path := backend.FormatURLPath("/data/"+version+"/hurricane/property?lat=%s&lng=%s", latStr, lngStr)
-	response := &firststreet.Hurricane{}
-	err := c.B.Call(http.MethodGet, path, response)
-	return response, err
-}
-
-// GetPropertyByAddress pulls a parcel's hurricane risk by address
-func (c Client) GetPropertyByAddress(address string) (*firststreet.Hurricane, error) {
-	path := backend.FormatURLPath("/data/"+version+"/hurricane/property?address=%s", address)
-	response := &firststreet.Hurricane{}
-	err := c.B.Call(http.MethodGet, path, response)
-	return response, err
-}
-
-// GetCityByFSID retreives City Hurricane Risk by its unique identifier
-func (c Client) GetCityByFSID(fsid string) (*firststreet.Hurricane, error) {
-	path := backend.FormatURLPath("/data/"+version+"/hurricane/city/%s", fsid)
-	response := &firststreet.Hurricane{}
-	err := c.B.Call(http.MethodGet, path, response)
-	return response, err
-}
-
-// GetCityByLatLng retrieves City Hurricane Risk by lat lng
-func (c Client) GetCityByLatLng(lat, lng float64) (*firststreet.Hurricane, error) {
-	latStr := strconv.FormatFloat(lat, 'f', -1, 64)
-	lngStr := strconv.FormatFloat(lng, 'f', -1, 64)
-
-	path := backend.FormatURLPath("/data/"+version+"/hurricane/city?lat=%s&lng=%s", latStr, lngStr)
-	response := &firststreet.Hurricane{}
-	err := c.B.Call(http.MethodGet, path, response)
-	return response, err
-}
-
-// GetCityByAddress pulls City Hurricane Risk by lat lng
-func (c Client) GetCityByAddress(address string) (*firststreet.Hurricane, error) {
-	path := backend.FormatURLPath("/data/"+version+"/hurricane/property?address=%s", address)
-
-	response := &firststreet.Hurricane{}
-	err := c.B.Call(http.MethodGet, path, response)
-	return response, err
-}
-

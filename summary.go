@@ -54,24 +54,24 @@ type City struct {
 	Geometry *LocationGeometry `json:"geometry"`
 }
 
-type SummaryResultsProperty struct {
+type PropertySummaryResults struct {
 	Location       Property
 	FirstFloodRisk FirstFloodRisk
 	FloodRisks     []FloodRisks
 }
 
-type SummaryResultsCity struct {
+type CitySummaryResults struct {
 	Location       City
 	FirstFloodRisk FirstFloodRisk
 	FloodRisks     []FloodRisks
 }
 
-type SummaryProperty struct {
+type PropertySummary struct {
 	FSID    int64                  `json:"FSID"`
-	Results SummaryResultsProperty `json:"results"`
+	Results PropertySummaryResults `json:"results"`
 }
 
-type SummaryCity struct {
+type CitySummary struct {
 	FSID    int64              `json:"FSID"`
-	Results SummaryResultsCity `json:"results"`
+	Results CitySummaryResults `json:"results"`
 }
