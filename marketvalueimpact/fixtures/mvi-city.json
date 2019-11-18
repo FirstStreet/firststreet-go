@@ -1,0 +1,23 @@
+{
+  "FSID": 1222175,
+  "results": [{
+    "floodID": "kt",
+    "floodData": [{
+        "year": 2018,
+        "data": [{
+          "type": "loss_historic",
+          "unit": "dollars",
+          "value": -5993339.8641536
+        }]
+      },
+      {
+        "year": 2033,
+        "data": [{
+          "type": "loss_future",
+          "unit": "dollars",
+          "value": -6915392.15094647
+        }]
+      }
+    ]
+  }]
+}
