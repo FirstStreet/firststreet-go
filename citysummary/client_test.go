@@ -64,7 +64,7 @@ func TestCitySummary(t *testing.T) {
 	assert.NotNil(t, property.Results.Location)
 
 	addressLookup := &firststreet.Lookup{
-		Address: "1327 Autumn Drive Fernandina Beach FL",
+		Address: "Fernandina Beach FL",
 	}
 
 	property, err = c.Lookup(addressLookup)
