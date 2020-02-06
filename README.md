@@ -47,7 +47,7 @@ Provide a `Lookup` to the specific product. A [lookup](https://docs.firststreet.
 
 ```go
 lookup := &firststreet.Lookup{
-  FSID: 123456,
+  FSID: "123456",
 }
 ```
 
