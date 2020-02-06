@@ -7,7 +7,7 @@ import (
 
 // Lookup determines which type of lookup to request to the API service
 type Lookup struct {
-	FSID    int64
+	FSID    string
 	Lat     float64
 	Lng     float64
 	Address string
@@ -25,14 +25,9 @@ type LocationType string
 const PropertyLocationType = LocationType("property")
 const CityLocationType = LocationType("city")
 
-// FSIDIsValid returns true if FSID is not 0
+// FSIDIsValid returns true if FSID is not ""
 func (l *Lookup) FSIDIsValid() bool {
-	return l.FSID != 0
-}
-
-// FSIDString returns FSID as a string
-func (l *Lookup) FSIDString() string {
-	return strconv.FormatInt(l.FSID, 10)
+	return l.FSID != ""
 }
 
 // Address is valid if address is not empty

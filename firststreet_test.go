@@ -13,7 +13,7 @@ func TestNewBackend(t *testing.T) {
 }
 
 func TestFSIDLookup(t *testing.T) {
-	fsid := int64(123456)
+	fsid := "123456"
 	fsidLookup := &Lookup{
 		FSID: fsid,
 	}
@@ -29,9 +29,6 @@ func TestFSIDLookup(t *testing.T) {
 
 	latlngString := fsidLookup.LatLngString("lat")
 	assert.Equal(t, latlngString, "")
-
-	fsidString := fsidLookup.FSIDString()
-	assert.Equal(t, fsidString, "123456")
 }
 
 func TestLatLngLookup(t *testing.T) {

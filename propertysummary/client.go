@@ -30,7 +30,7 @@ func (c Client) Lookup(lookup *firststreet.Lookup) (*firststreet.PropertySummary
 	}
 
 	if lookupType == firststreet.FSIDLookup {
-		path = backend.FormatURLPath("/data/"+c.B.Version+"/summary/property/%s", lookup.FSIDString())
+		path = backend.FormatURLPath("/data/"+c.B.Version+"/summary/property/%s", lookup.FSID)
 	}
 
 	if lookupType == firststreet.CoordinateLookup {

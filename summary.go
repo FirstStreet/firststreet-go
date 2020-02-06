@@ -28,7 +28,7 @@ type LocationGeometry struct {
 }
 
 type Property struct {
-	FSID          int64             `json:"FSID"`
+	FSID          string            `json:"FSID"`
 	PrimaryNumber string            `json:"primaryNumber"`
 	StreetName    string            `json:"streetName"`
 	LastUpdated   string            `json:"lastUpdated"`
@@ -43,12 +43,12 @@ type Property struct {
 }
 
 type PropertyCity struct {
-	FSID int64  `json:"FSID"`
+	FSID string `json:"FSID"`
 	Name string `json:"Name"`
 }
 
 type City struct {
-	FSID     int64             `json:"FSID"`
+	FSID     string            `json:"FSID"`
 	Name     string            `json:"name"`
 	State    string            `json:"state"`
 	Geometry *LocationGeometry `json:"geometry"`
@@ -67,11 +67,11 @@ type CitySummaryResults struct {
 }
 
 type PropertySummary struct {
-	FSID    int64                  `json:"FSID"`
+	FSID    string                 `json:"FSID"`
 	Results PropertySummaryResults `json:"results"`
 }
 
 type CitySummary struct {
-	FSID    int64              `json:"FSID"`
+	FSID    string             `json:"FSID"`
 	Results CitySummaryResults `json:"results"`
 }

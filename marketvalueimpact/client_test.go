@@ -39,13 +39,13 @@ func TestMVILookup(t *testing.T) {
 	}
 
 	fsidLookup := &firststreet.Lookup{
-		FSID: 450350219571,
+		FSID: "450350219571",
 	}
 
 	mvi, err := c.Lookup(firststreet.PropertyLocationType, fsidLookup)
 	assert.Nil(t, err)
 	assert.NotNil(t, mvi)
-	assert.Equal(t, mvi.FSID, int64(450350219571))
+	assert.Equal(t, mvi.FSID, "450350219571")
 	assert.NotNil(t, mvi.Results)
 
 	fsidLookupBad := &firststreet.Lookup{}
@@ -60,7 +60,7 @@ func TestMVILookup(t *testing.T) {
 	mvi, err = c.Lookup(firststreet.PropertyLocationType, latLngLookup)
 	assert.Nil(t, err)
 	assert.NotNil(t, mvi)
-	assert.Equal(t, mvi.FSID, int64(450350219571))
+	assert.Equal(t, mvi.FSID, "450350219571")
 	assert.NotNil(t, mvi.Results)
 
 	addressLookup := &firststreet.Lookup{
@@ -70,7 +70,7 @@ func TestMVILookup(t *testing.T) {
 	mvi, err = c.Lookup(firststreet.PropertyLocationType, addressLookup)
 	assert.Nil(t, err)
 	assert.NotNil(t, mvi)
-	assert.Equal(t, mvi.FSID, int64(450350219571))
+	assert.Equal(t, mvi.FSID, "450350219571")
 	assert.NotNil(t, mvi.Results)
 
 }

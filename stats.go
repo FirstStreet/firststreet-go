@@ -17,6 +17,6 @@ type ResultsData struct {
 }
 
 type FloodRiskData struct {
-	FSID    int64         `json:"FSID"`
+	FSID    string        `json:"FSID"`
 	Results []ResultsData `json:"results"`
 }

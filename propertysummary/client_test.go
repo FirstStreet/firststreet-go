@@ -50,13 +50,13 @@ func TestPropertySummary(t *testing.T) {
 	}
 
 	fsidLookup := &firststreet.Lookup{
-		FSID: 111134,
+		FSID: "111134",
 	}
 
 	property, err := c.Lookup(fsidLookup)
 	assert.Nil(t, err)
 	assert.NotNil(t, property)
-	assert.Equal(t, property.FSID, int64(111134))
+	assert.Equal(t, property.FSID, "111134")
 	assert.NotNil(t, property.Results.Location)
 
 	fsidLookupBad := &firststreet.Lookup{}
@@ -71,7 +71,7 @@ func TestPropertySummary(t *testing.T) {
 	property, err = c.Lookup(latLngLookup)
 	assert.Nil(t, err)
 	assert.NotNil(t, property)
-	assert.Equal(t, property.FSID, int64(111134))
+	assert.Equal(t, property.FSID, "111134")
 	assert.NotNil(t, property.Results.Location)
 
 	addressLookup := &firststreet.Lookup{
@@ -81,7 +81,7 @@ func TestPropertySummary(t *testing.T) {
 	property, err = c.Lookup(addressLookup)
 	assert.Nil(t, err)
 	assert.NotNil(t, property)
-	assert.Equal(t, property.FSID, int64(111134))
+	assert.Equal(t, property.FSID, "111134")
 	assert.NotNil(t, property.Results.Location)
 
 }
